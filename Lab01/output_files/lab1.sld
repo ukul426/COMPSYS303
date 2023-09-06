@@ -1,6 +1,6 @@
 <sld_project_info>
   <sld_infos>
-    <sld_info hpath="nios2_system:inst0" name="inst0">
+    <sld_info hpath="nios2_system:inst" name="inst">
       <assignment_values>
         <assignment_value text="QSYS_NAME nios2_system HAS_SOPCINFO 1 GENERATION_ID 1690982068"/>
       </assignment_values>
