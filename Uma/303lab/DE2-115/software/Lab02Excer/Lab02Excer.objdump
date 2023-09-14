@@ -534,7 +534,7 @@ Disassembly of section .entry:
   800014:	08409114 	ori	at,at,580
     jmp r1
   800018:	0800683a 	jmp	at
-  80001c:	00000000 	call	0 <__reset-0x800000>
+  80001c:	00000000 	call	0 <__alt_mem_sdram-0x800000>
 
 Disassembly of section .exceptions:
 
@@ -1087,11 +1087,11 @@ void key_button_interrupts(void* context, alt_u32 id) {
   80034c:	10842b04 	addi	r2,r2,4268
   800350:	10c00035 	stwio	r3,0(r2)
 
-	if (!((*temp) & 0x01)) {
+	if ((*temp) & 0x01) {
   800354:	e0bffd17 	ldw	r2,-12(fp)
   800358:	10800017 	ldw	r2,0(r2)
   80035c:	1080004c 	andi	r2,r2,1
-  800360:	1000061e 	bne	r2,zero,80037c <key_button_interrupts+0x6c>
+  800360:	10000626 	beq	r2,zero,80037c <key_button_interrupts+0x6c>
 		// Key0 pressed
 		incrementCounter();
   800364:	08002900 	call	800290 <incrementCounter>
@@ -1103,11 +1103,11 @@ void key_button_interrupts(void* context, alt_u32 id) {
   800378:	080046c0 	call	80046c <printf>
 	}
 
-	if (!((*temp) & 0x02)) {
+	if ((*temp) & 0x02) {
   80037c:	e0bffd17 	ldw	r2,-12(fp)
   800380:	10800017 	ldw	r2,0(r2)
   800384:	1080008c 	andi	r2,r2,2
-  800388:	1000031e 	bne	r2,zero,800398 <key_button_interrupts+0x88>
+  800388:	10000326 	beq	r2,zero,800398 <key_button_interrupts+0x88>
 		// Key1 pressed
 		key1_pressed = 1;
   80038c:	00800044 	movi	r2,1
@@ -1118,7 +1118,7 @@ void key_button_interrupts(void* context, alt_u32 id) {
 	}
 }
   800394:	00000106 	br	80039c <key_button_interrupts+0x8c>
-	if (!((*temp) & 0x02)) {
+	if ((*temp) & 0x02) {
 		// Key1 pressed
 		key1_pressed = 1;
 	} else {
@@ -1376,7 +1376,7 @@ int main(void) {
   8006f4:	00801248 	cmpgei	r2,zero,73
   8006f8:	00801248 	cmpgei	r2,zero,73
   8006fc:	00801248 	cmpgei	r2,zero,73
-  800700:	00800b00 	call	800b0 <__reset-0x77ff50>
+  800700:	00800b00 	call	800b0 <__alt_mem_sdram-0x77ff50>
   800704:	00801248 	cmpgei	r2,zero,73
   800708:	00801248 	cmpgei	r2,zero,73
   80070c:	00800b0c 	andi	r2,zero,44
@@ -1410,12 +1410,12 @@ int main(void) {
   80077c:	00801248 	cmpgei	r2,zero,73
   800780:	008011b0 	cmpltui	r2,zero,70
   800784:	00801248 	cmpgei	r2,zero,73
-  800788:	008011c0 	call	8011c <__reset-0x77fee4>
+  800788:	008011c0 	call	8011c <__alt_mem_sdram-0x77fee4>
   80078c:	00801094 	movui	r2,66
   800790:	008007d0 	cmplti	r2,zero,31
   800794:	008010b4 	movhi	r2,66
   800798:	00801248 	cmpgei	r2,zero,73
-  80079c:	008010c0 	call	8010c <__reset-0x77fef4>
+  80079c:	008010c0 	call	8010c <__alt_mem_sdram-0x77fef4>
   8007a0:	00801248 	cmpgei	r2,zero,73
   8007a4:	0080111c 	xori	r2,zero,68
   8007a8:	00801248 	cmpgei	r2,zero,73
@@ -8333,7 +8333,7 @@ int main(void) {
   807178:	00807860 	cmpeqi	r2,zero,481
   80717c:	00807b2c 	andhi	r2,zero,492
   807180:	00807b2c 	andhi	r2,zero,492
-  807184:	00807880 	call	80788 <__reset-0x77f878>
+  807184:	00807880 	call	80788 <__alt_mem_sdram-0x77f878>
   807188:	00807b2c 	andhi	r2,zero,492
   80718c:	00807b2c 	andhi	r2,zero,492
   807190:	00807b2c 	andhi	r2,zero,492
@@ -8408,12 +8408,12 @@ int main(void) {
   8072a4:	00807b2c 	andhi	r2,zero,492
   8072a8:	00807630 	cmpltui	r2,zero,472
   8072ac:	00807b2c 	andhi	r2,zero,492
-  8072b0:	00807640 	call	80764 <__reset-0x77f89c>
+  8072b0:	00807640 	call	80764 <__alt_mem_sdram-0x77f89c>
   8072b4:	0080767c 	xorhi	r2,zero,473
   8072b8:	00807378 	rdprs	r2,zero,461
   8072bc:	00807624 	muli	r2,zero,472
   8072c0:	00807b2c 	andhi	r2,zero,492
-  8072c4:	00807a00 	call	807a0 <__reset-0x77f860>
+  8072c4:	00807a00 	call	807a0 <__alt_mem_sdram-0x77f860>
   8072c8:	00807b2c 	andhi	r2,zero,492
   8072cc:	00807a58 	cmpnei	r2,zero,489
   8072d0:	00807b2c 	andhi	r2,zero,492
@@ -21645,19 +21645,19 @@ alt_exception_cause_generated_bad_addr(alt_exception_cause cause)
   810b2c:	1000683a 	jmp	r2
   810b30:	00810b70 	cmpltui	r2,zero,1069
   810b34:	00810b70 	cmpltui	r2,zero,1069
-  810b38:	00810b80 	call	810b8 <__reset-0x77ef48>
-  810b3c:	00810b80 	call	810b8 <__reset-0x77ef48>
-  810b40:	00810b80 	call	810b8 <__reset-0x77ef48>
+  810b38:	00810b80 	call	810b8 <__alt_mem_sdram-0x77ef48>
+  810b3c:	00810b80 	call	810b8 <__alt_mem_sdram-0x77ef48>
+  810b40:	00810b80 	call	810b8 <__alt_mem_sdram-0x77ef48>
   810b44:	00810b70 	cmpltui	r2,zero,1069
   810b48:	00810b78 	rdprs	r2,zero,1069
-  810b4c:	00810b80 	call	810b8 <__reset-0x77ef48>
+  810b4c:	00810b80 	call	810b8 <__alt_mem_sdram-0x77ef48>
   810b50:	00810b70 	cmpltui	r2,zero,1069
   810b54:	00810b70 	cmpltui	r2,zero,1069
-  810b58:	00810b80 	call	810b8 <__reset-0x77ef48>
+  810b58:	00810b80 	call	810b8 <__alt_mem_sdram-0x77ef48>
   810b5c:	00810b70 	cmpltui	r2,zero,1069
   810b60:	00810b78 	rdprs	r2,zero,1069
-  810b64:	00810b80 	call	810b8 <__reset-0x77ef48>
-  810b68:	00810b80 	call	810b8 <__reset-0x77ef48>
+  810b64:	00810b80 	call	810b8 <__alt_mem_sdram-0x77ef48>
+  810b68:	00810b80 	call	810b8 <__alt_mem_sdram-0x77ef48>
   810b6c:	00810b70 	cmpltui	r2,zero,1069
   case NIOS2_EXCEPTION_MISALIGNED_TARGET_PC:
   case NIOS2_EXCEPTION_TLB_READ_PERM_VIOLATION:
@@ -21775,7 +21775,7 @@ alt_exception_cause_generated_bad_addr(alt_exception_cause cause)
   810cd8:	d9400015 	stw	r5,0(sp)
   810cdc:	d9800115 	stw	r6,4(sp)
   810ce0:	d9c00215 	stw	r7,8(sp)
-  810ce4:	00000000 	call	0 <__reset-0x800000>
+  810ce4:	00000000 	call	0 <__alt_mem_sdram-0x800000>
   810ce8:	d9400017 	ldw	r5,0(sp)
   810cec:	d9800117 	ldw	r6,4(sp)
   810cf0:	d9c00217 	ldw	r7,8(sp)
@@ -21859,7 +21859,7 @@ alt_exception_cause_generated_bad_addr(alt_exception_cause cause)
   810e20:	10003226 	beq	r2,zero,810eec <__call_exitprocs+0x178>
   810e24:	a009883a 	mov	r4,r20
   810e28:	98800015 	stw	r2,0(r19)
-  810e2c:	00000000 	call	0 <__reset-0x800000>
+  810e2c:	00000000 	call	0 <__alt_mem_sdram-0x800000>
   810e30:	9d000017 	ldw	r20,0(r19)
   810e34:	a03fe41e 	bne	r20,zero,810dc8 <__alt_mem_onchip_mem+0xff808dc8>
   810e38:	dfc00a17 	ldw	ra,40(sp)
