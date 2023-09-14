@@ -1,0 +1,10 @@
+scchart NewSCChart {
+  input bool A
+
+  region {
+    initial state A
+    if A go to doneA
+    
+    final state doneA
+  }
+}
