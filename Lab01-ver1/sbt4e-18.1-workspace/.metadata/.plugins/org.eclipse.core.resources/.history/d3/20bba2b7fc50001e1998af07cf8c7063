@@ -1,0 +1,42 @@
+#include <system.h>
+#include <stdio.h>
+#include <altera_avalon_pio_regs.h> // to use PIO functions
+#include <alt_types.h> // alt_u32 is a kind of alt_types
+#include <sys/alt_irq.h> // to register interrupts
+
+int count=0;
+
+
+int count = 0;
+
+// Define the IRQ mask for key0 only
+#define KEY0_MASK 0x1
+
+// ISR for key0
+void key0_interrupt_function(void* context, alt_u32 id)
+{
+    // Check if key0 is pressed (bit 0 is set)
+    if (IORD_ALTERA_AVALON_PIO_EDGE_CAP(KEYS_BASE) & 0x1) {
+        count++;
+        printf("Key0 pressed. Count: %d\n", count);
+    }
+
+    // Clear the edge capture register
+    IOWR_ALTERA_AVALON_PIO_EDGE_CAP(KEYS_BASE, 0);
+}
+
+int main(void)
+{
+    // Clears the edge capture register
+    IOWR_ALTERA_AVALON_PIO_EDGE_CAP(KEYS_BASE, 0);
+
+    // Enable interrupt only for key0 (bit 0)
+    IOWR_ALTERA_AVALON_PIO_IRQ_MASK(KEYS_BASE, KEY0_MASK);
+
+    // Register the ISR for key0
+    alt_irq_register(KEYS_IRQ, NULL, key0_interrupt_function);
+
+    while (1); // Infinite loop to keep the program running
+    return 0;
+}
+

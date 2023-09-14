@@ -1,0 +1,15 @@
+10:52:06 **** Build of configuration Nios II for project lab_2 ****
+make all 
+Info: Building ../lab_2_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../lab_2_bsp/
+[BSP build complete]
+Info: Compiling hello_world.c to obj/default/hello_world.o
+nios2-elf-gcc -xc -MP -MMD -c -I../lab_2_bsp//HAL/inc -I../lab_2_bsp/ -I../lab_2_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world.o hello_world.c
+Info: Linking lab_2.elf
+nios2-elf-g++  -T'../lab_2_bsp//linker.x' -msys-crt0='../lab_2_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../lab_2_bsp/   -Wl,-Map=lab_2.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o lab_2.elf obj/default/hello_world.o -lm -msys-lib=m
+nios2-elf-insert lab_2.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name nios2_system --quartus_project_dir "C:/Users/dulan/OneDrive/Desktop/ENGGEN/2023_sem2/303/Lab01/Lab1" --jdi ../..//output_files/lab1.jdi --sopcinfo C:/Users/dulan/OneDrive/Desktop/ENGGEN/2023_sem2/303/Lab01/Lab1/software/lab_2_bsp/../../nios2_system.sopcinfo
+Info: (lab_2.elf) 78 KBytes program size (code + initialized data).
+Info:             8106 KBytes free for stack + heap.
+Info: Creating lab_2.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source lab_2.elf >lab_2.objdump
+[lab_2 build complete]
