@@ -1,0 +1,96 @@
+@HVLayout
+scchart Pacemaker {
+  input signal AS, VS
+  output signal  AP, VP
+  signal VE, VR, AE, AR
+  bool inside_URI
+  //VE= Ventricular event
+  //VR= Ventricular refractory period
+  //AE= Atrial event
+  //AR= Atrial refractory period
+ 
+  //Timerout values in milliseconds
+  const int AVI_VALUE = 300
+  const int AEI_VALUE = 800  
+  const int PVARP_VALUE = 50
+  const int VRP_VALUE = 150
+  const int LRI_VALUE = 950
+  const int URI_VALUE = 900
+  
+  
+  region  VRP_timer{
+    clock t = 0
+    initial state idle
+    if VS || pre(VP) do VE; t=0 go to block
+    state block
+    if VS/VR go to block
+    if t>=VRP_VALUE go to idle  
+  }
+  
+  
+  region  PVARP_timer{
+    clock t = 0
+    initial state idle
+    if VS|| pre(VP) do t=0 go to block
+    if AS|| pre(AP) do AE go to idle
+    state block
+    if AS do AR go to block
+    if t>=PVARP_VALUE go to idle      
+  }
+  
+  
+  
+  region  AVI_timer{
+    clock t = 0
+    initial state idle
+    if  AE do t=0 go to wait
+    state wait
+    if  VE go to idle
+    if  t>=AVI_VALUE && !inside_URI do VP go to idle
+       
+  }
+  
+  
+    region  AEI_timer{
+    clock t = 0
+    initial state idle
+    if VE do t=0 go to wait
+    state wait 
+    if  VE go to idle
+    if  t>=AEI_VALUE do AP go to idle
+       
+  }
+  
+    region  LRI_timer{
+    clock t = 0
+    initial state idle
+    if VE do t=0 go to wait
+    state wait 
+    if VE go to idle   
+    if  t>=LRI_VALUE do VP go to idle
+       
+  }
+  
+  
+    region  URI_timer{
+    clock t = 0
+    initial state idle
+    if VE do t=0; inside_URI=1 go to wait
+    state wait 
+    if VE do t=0 go to wait
+    if  t>=URI_VALUE do inside_URI=0 go to idle
+       
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+}
