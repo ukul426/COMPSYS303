@@ -9,17 +9,24 @@ scchart Pacemaker {
   signal VE, VR, AE, AR
   bool inside_URI
   
-  region  VRP_timer{
+  
+  
+    region  AVI_timer{
     clock t = 0
-    host "int" VRP_Constraint = `VRP_VALUE`
-    
+    host "int" AVI_Constraint = `AVI_VALUE`
+   
     initial state idle
-    if VS||pre(VP)  do VE; t=0 go to block
-    
-    state block
-    if VS do VR go to block
-    if t>=VRP_Constraint go to idle  
+    if  AS do t=0 go to wait
+    if VS go to idle
+   
+    state wait
+    if  AE go to idle
+    if  t>=AVI_Constraint && !inside_URI do VP go to idle
+       
   }
+  
+  
+  
 
   
   region  PVARP_timer{
@@ -36,19 +43,18 @@ scchart Pacemaker {
   }
   
 
-  region  AVI_timer{
+  region  VRP_timer{
     clock t = 0
-    host "int" AVI_Constraint = `AVI_VALUE`
-   
+    host "int" VRP_Constraint = `VRP_VALUE`
+    
     initial state idle
-    if  AE do t=0 go to wait
-   
-    state wait
-    if  AE go to idle
-    if  t>=AVI_Constraint && !inside_URI do VP go to idle
-       
+    if VS||pre(VP)  do VE; t=0 go to block
+    
+    state block
+    if VS do VR go to block
+    if t>=VRP_Constraint go to idle  
   }
-  
+
   
     region  AEI_timer{
     clock t = 0
