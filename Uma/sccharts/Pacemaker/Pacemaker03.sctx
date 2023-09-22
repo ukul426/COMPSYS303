@@ -6,57 +6,62 @@
 scchart Pacemaker {
   input signal AS, VS
   output signal  AP, VP
-  signal V_event, VR, A_event, AR
+  signal VR, AR, V_event, A_event
   bool inside_URI
   
-
-  region  AVI_timer{
+  
+  
+    region  AVI_timer{
     clock t = 0
     host "int" AVI_Constraint = `AVI_VALUE`
    
     initial state idle
-    if  A_event do t=0 go to wait
+    if  AS || pre(AP) do t=0 go to wait
    
     state wait
-    if  V_event go to idle
+    if  VS || pre(VP) go to idle
     if  t>=AVI_Constraint && !inside_URI do VP go to idle
        
   }
   
+    
   region  PVARP_timer{
     clock t = 0
     host "int" PVARP_Constraint = `PVARP_VALUE`
     
     initial state idle
-    if VS||pre(VP) do t=0 go to block
-    if AS||pre(AP) do A_event go to idle
+    if VS|| pre(VP)  do t=0 go to block
+   //? if AS|| pre(AP) go to idle
     
     state block
     if AS do AR go to block
     if t>=PVARP_Constraint go to idle      
   }
   
+
   region  VRP_timer{
     clock t = 0
     host "int" VRP_Constraint = `VRP_VALUE`
     
     initial state idle
-    if VS||pre(VP) do t=0; V_event go to block
+    if VS||pre(VP) do t=0 go to block
     
     state block
     if VS do VR go to block
     if t>=VRP_Constraint go to idle  
   }
+
   
     region  AEI_timer{
     clock t = 0
     host "int" AEI_Constraint = `AEI_VALUE`
     
     initial state idle
-    if V_event do t=0 go to wait
+   // if VE do t=0 go to wait
+   if VS||pre(VP) do t=0 go to wait
    
     state wait 
-    if  A_event go to idle
+    if  AS || pre(AP) go to idle
     if  t>=AEI_Constraint do AP go to idle
        
   }
@@ -65,25 +70,25 @@ scchart Pacemaker {
     clock t = 0
     host "int" LRI_Constraint = `LRI_VALUE`
    
-    initial state idle
-    if V_event do t=0 go to wait   
-    
-    
-    state wait
-    if V_event do t=0 go to wait
-    if  t>=LRI_Constraint do VP go to idle 
+    initial state wait
+    if VS||pre(VP) do t=0 go to wait
+    //if VE do t=0 go to idle   
+    if VS||pre(VP)go to wait
+    if  t>=LRI_Constraint do VP;t=0 go to wait  
+     
   }
   
-
   
     region  URI_timer{
     clock t = 0
     host "int" URI_Constraint = `URI_VALUE`
     
     initial state idle
-    if V_event do t=0; inside_URI= true go to wait
+      if VS||pre(VP) do t=0; inside_URI= true go to wait
     
     state wait 
+    if VS||pre(VP) do t = 0 go to wait
+    // DO T= 0
     if  t>=URI_Constraint do inside_URI= false go to idle
        
   }
