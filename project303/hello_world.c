@@ -1,24 +1,36 @@
-/*
- * "Hello World" example.
- *
- * This example prints 'Hello from Nios II' to the STDOUT stream. It runs on
- * the Nios II 'standard', 'full_featured', 'fast', and 'low_cost' example
- * designs. It runs with or without the MicroC/OS-II RTOS and requires a STDOUT
- * device in your system's hardware.
- * The memory footprint of this hosted application is ~69 kbytes by default
- * using the standard reference design.
- *
- * For a reduced footprint version of this template, and an explanation of how
- * to reduce the memory footprint for a given application, see the
- * "small_hello_world" template.
- *
- */
-
 #include <stdio.h>
+#include <string.h>
+#include "system.h"
 
-int main()
-{
-  printf("Hello from Nios II!\n");
 
-  return 0;
+// ISR for UART receive interrupt
+void uart_receive_isr(void* context, alt_u32 id) {
+
+    // Read the received character from UART data register
+    char receivedChar = IORD_ALTERA_AVALON_UART_RXDATA(UART_BASE);
+
+    // print the receivedChar
+    printf("Received: %c\n", receivedChar);
+
+    // Clear the UART receive interrupt flag
+    IOWR_ALTERA_AVALON_UART_STATUS(UART_BASE, 0);
 }
+
+
+int main(void) {
+
+    // Enable global interrupts
+    alt_irq_enable_all();
+
+    // Enable UART receiver interrupts
+    alt_irq_register(UART_IRQ, NULL, uart_receive_isr);
+
+
+    while (1) {
+        // Main program loop or other tasks
+    }
+
+    return 0;
+}
+
+
