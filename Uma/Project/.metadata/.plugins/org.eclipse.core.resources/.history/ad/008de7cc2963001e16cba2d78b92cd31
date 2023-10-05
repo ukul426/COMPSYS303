@@ -1,0 +1,62 @@
+/*
+ * "Hello World" example.
+ *
+ * This example prints 'Hello from Nios II' to the STDOUT stream. It runs on
+ * the Nios II 'standard', 'full_featured', 'fast', and 'low_cost' example
+ * designs. It runs with or without the MicroC/OS-II RTOS and requires a STDOUT
+ * device in your system's hardware.
+ * The memory footprint of this hosted application is ~69 kbytes by default
+ * using the standard reference design.
+ *
+ * For a reduced footprint version of this template, and an explanation of how
+ * to reduce the memory footprint for a given application, see the
+ * "small_hello_world" template.
+ *
+ */
+
+#include <stdio.h>
+#include <unistd.h>;
+#include "stdio.h"
+#include "sys/alt_alarm.h"
+#include <altera_avalon_pio_regs.h>
+#include <system.h> // to use the symbolic names
+#include <altera_avalon_pio_regs.h> // to use PIO functions
+#include <alt_types.h> // alt_u32 is a kind of alt_types
+#include <sys/alt_irq.h>
+
+
+/*Include SCchart files
+#include "pacemaker.c"*/
+#include "pacemaker.h"
+
+
+
+
+
+int main(){
+
+	//create the struct
+	TickData model;
+
+	//call reset function
+		reset(&model);
+
+
+
+
+
+
+
+	while (1);
+
+	model.AS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE, 0x2);
+	model.VS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE, 0x1);
+	//call tick function
+	tick(TickData* d);
+
+	model.AP = IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0x2);
+	model.VP = IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0x1);
+
+
+	return 0;
+}

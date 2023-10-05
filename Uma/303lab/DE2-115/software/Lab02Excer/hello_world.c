@@ -22,7 +22,12 @@
 #include <alt_types.h> // alt_u32 is a kind of alt_types
 #include <sys/alt_irq.h>
 
-
+int AVI_timer = 0;
+int PVARP_timer = 0;
+int VRP_timer = 0;
+int AEI_timer = 0;
+int LRI_timer = 0;
+int URI_timer = 0;
 
 volatile int counter = 0;
 volatile int key1_pressed = 0;

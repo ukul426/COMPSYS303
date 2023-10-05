@@ -142,8 +142,7 @@ ACDS_VERSION := 18.1
 ELF := project.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS += hello_world.c
-C_SRCS += scchart.c
+C_SRCS := hello_world.c
 CXX_SRCS :=
 ASM_SRCS :=
 

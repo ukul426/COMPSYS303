@@ -1,3 +1,10 @@
+<<<<<<< HEAD
 activeuserprofiles=EN399241;Team
 eclipse.preferences.version=1
 org.eclipse.rse.systemtype.local.systemType.defaultUserId=ukul426
+=======
+activeuserprofiles=EN403881;Team
+eclipse.preferences.version=1
+org.eclipse.rse.systemtype.local.systemType.defaultUserId=dwit264
+useridperkey=EN403881.Local\=dwit264;
+>>>>>>> f2821213d6bef795553b8c671f8059cebae90a42

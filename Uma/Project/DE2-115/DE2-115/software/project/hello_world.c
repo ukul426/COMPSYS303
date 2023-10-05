@@ -15,10 +15,59 @@
  */
 
 #include <stdio.h>
+#include <unistd.h>;
+#include "stdio.h"
+#include "sys/alt_alarm.h"
+#include <altera_avalon_pio_regs.h>
+#include <system.h> // to use the symbolic names
+#include <altera_avalon_pio_regs.h> // to use PIO functions
+#include <alt_types.h> // alt_u32 is a kind of alt_types
+#include <sys/alt_irq.h>
 
-int main()
-{
-  printf("Hello from Nios II!\n");
 
-  return 0;
+/*Include SCchart files
+#include "pacemaker.c"*/
+#include "pacemaker.h"
+
+alt_u32 timer_isr_function(void* context){
+	int *timeCount = (int*) context;
+	(*timeCount)++;
+	return 100; // the next time out will be 100 milli-seconsS
+}
+
+
+
+int main(){
+
+	//create the struct
+	TickData model;
+
+	//call reset function
+		reset(&model);
+
+	// TIMER
+	alt_alarm timer;
+	int timeCountMain = 0;
+	void* timerContext = (void*) &timeCountMain;
+	//start the timer, with timeout of 100 milli-seconds
+	alt_alarm_start(&timer, 100, timer_isr_function, timerContext);
+
+
+
+
+
+	while (1);
+
+		model.AS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE&0x2);
+		model.VS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE&0x1);
+
+		//call tick function
+		tick(TickData* d);
+
+		model.deltaT = ;
+
+		IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE &0x2, model.AP);
+		IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE &0x1, model.VP);
+
+		return 0;
 }
