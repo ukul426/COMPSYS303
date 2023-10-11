@@ -24,11 +24,6 @@ TickData model;
 double _ticktime;
 
 
-// Timer ISR
-alt_u32 timer_isr_function(void* context) {
-
-	return 100; // Set the timer to trigger every 500ms
-}
 
 
 // ISR for UART receive interrupt
@@ -48,7 +43,6 @@ void uart_receive_isr(void* context, alt_u32 id) {
 int main(int argc, const char* argv[]) {
 
 
-	alt_alarm timer;
 
 	// Enable global interrupts
 	alt_irq_enable_all();
@@ -72,7 +66,7 @@ int main(int argc, const char* argv[]) {
     	 model.VS =&VS;
 
 
-         model.deltaT =
+         model.deltaT =100;
 
         // Reaction of model
         tick(&model);
