@@ -441,7 +441,7 @@ Disassembly of section .entry:
   800014:	08409114 	ori	at,at,580
     jmp r1
   800018:	0800683a 	jmp	at
-  80001c:	00000000 	call	0 <__alt_mem_sdram-0x800000>
+  80001c:	00000000 	call	0 <__reset-0x800000>
 
 Disassembly of section .exceptions:
 
@@ -923,13 +923,10 @@ alt_u32 timer_isr_function(void* context) {
   800294:	df000115 	stw	fp,4(sp)
   800298:	df000104 	addi	fp,sp,4
   80029c:	e13fff15 	stw	r4,-4(fp)
-	//int* timeCount = (int*) context;
-
-	// deltaT update with the time since last timer interrupt (100 microseconds)
 	doTick = 1;
   8002a0:	00800044 	movi	r2,1
   8002a4:	d0a72615 	stw	r2,-25448(gp)
-	return 10; // Set the timer to trigger every 100ms
+	return 10; // Set the timer to trigger every 10ms
   8002a8:	00800284 	movi	r2,10
 }
   8002ac:	e037883a 	mov	sp,fp
@@ -18207,7 +18204,7 @@ alt_exception_cause_generated_bad_addr(alt_exception_cause cause)
   80d2bc:	d9400015 	stw	r5,0(sp)
   80d2c0:	d9800115 	stw	r6,4(sp)
   80d2c4:	d9c00215 	stw	r7,8(sp)
-  80d2c8:	00000000 	call	0 <__alt_mem_sdram-0x800000>
+  80d2c8:	00000000 	call	0 <__reset-0x800000>
   80d2cc:	d9400017 	ldw	r5,0(sp)
   80d2d0:	d9800117 	ldw	r6,4(sp)
   80d2d4:	d9c00217 	ldw	r7,8(sp)
@@ -18291,7 +18288,7 @@ alt_exception_cause_generated_bad_addr(alt_exception_cause cause)
   80d404:	10003226 	beq	r2,zero,80d4d0 <__call_exitprocs+0x178>
   80d408:	a009883a 	mov	r4,r20
   80d40c:	98800015 	stw	r2,0(r19)
-  80d410:	00000000 	call	0 <__alt_mem_sdram-0x800000>
+  80d410:	00000000 	call	0 <__reset-0x800000>
   80d414:	9d000017 	ldw	r20,0(r19)
   80d418:	a03fe41e 	bne	r20,zero,80d3ac <__alt_mem_onchip_mem+0xff8053ac>
   80d41c:	dfc00a17 	ldw	ra,40(sp)
