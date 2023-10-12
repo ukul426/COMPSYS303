@@ -1,0 +1,95 @@
+#resource "timing.h"
+#hostcode-c "#include \"timing.h\""
+#hostcode-c "#include <stdio.h>"
+@ClocksUseSD 
+//@HVLayout
+scchart Pacemaker {
+  input signal AS, VS
+  output signal  AP, VP
+  signal V_event, VR, A_event, AR
+  bool inside_URI
+  
+  host "int" AVI_Constraint = `AVI_VALUE`
+  host "int" PVARP_Constraint = `PVARP_VALUE`
+  host "int" VRP_Constraint = `VRP_VALUE`
+  host "int" AEI_Constraint = `AEI_VALUE`
+  host "int" LRI_Constraint = `LRI_VALUE`
+  host "int" URI_Constraint = `URI_VALUE`
+  
+  
+  
+  region  AVI_timer{
+    clock t = 0
+   
+    initial state idle
+    if  A_event do t=0 go to wait
+   
+    state wait
+    if  V_event go to idle
+    if  t>=AVI_Constraint && !inside_URI do VP go to idle
+       
+  }
+  
+  region  PVARP_timer{
+    clock t = 0
+    
+    initial state idle
+    if VS||pre(VP) do t=0 go to block
+    if AS||pre(AP) do A_event go to idle
+    
+    state block
+    if AS do AR go to block
+    if t>=PVARP_Constraint go to idle      
+  }
+  
+  region  VRP_timer{
+    clock t = 0
+    
+    
+    initial state idle
+    if VS||pre(VP) do t=0; V_event go to block
+    
+    state block
+    if VS do VR go to block
+    if t>=VRP_Constraint go to idle  
+  }
+  
+    region  AEI_timer{
+    clock t = 0    
+    initial state idle
+    if V_event do t=0 go to wait
+   
+    state wait 
+    if  A_event go to idle
+    if  t>=AEI_Constraint do AP go to idle
+       
+  }
+ 
+    region  LRI_timer{
+    clock t = 0
+    
+    initial state idle
+    if V_event do t=0 go to wait   
+    
+    
+    state wait
+    if V_event do t=0 go to wait
+    if  t>=LRI_Constraint do VP go to idle 
+  }
+  
+
+  
+    region  URI_timer{
+    clock t = 0
+    
+    
+    initial state idle
+    if V_event do t=0; inside_URI= true go to wait
+    
+    state wait 
+    if V_event do t=0 go to wait
+    if  t>=URI_Constraint do inside_URI= false go to idle
+       
+  }
+
+}

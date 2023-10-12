@@ -1,0 +1,12 @@
+13:09:11 **** Build of configuration Nios II for project pacemaker_project ****
+make all 
+Info: Building ../pacemaker_project_bsp/
+C:/intelFPGA/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pacemaker_project_bsp/
+[BSP build complete]
+Info: Compiling hello_world.c to obj/default/hello_world.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pacemaker_project_bsp//HAL/inc -I../pacemaker_project_bsp/ -I../pacemaker_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world.o hello_world.c
+Info: Compiling scchart.c to obj/default/scchart.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pacemaker_project_bsp//HAL/inc -I../pacemaker_project_bsp/ -I../pacemaker_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/scchart.o scchart.c
+scchart.c:16:20: fatal error: timing.h: No such file or directory
+compilation terminated.
+make: *** [obj/default/scchart.o] Error 1

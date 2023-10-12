@@ -1,0 +1,118 @@
+14:42:47 **** Build of configuration Nios II for project pacemaker_project ****
+make all 
+Info: Building ../pacemaker_project_bsp/
+C:/intelFPGA/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../pacemaker_project_bsp/
+[BSP build complete]
+Info: Compiling hello_world.c to obj/default/hello_world.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pacemaker_project_bsp//HAL/inc -I../pacemaker_project_bsp/ -I../pacemaker_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world.o hello_world.c
+hello_world.c:16:20: warning: extra tokens at end of #include directive
+ #include <unistd.h>;
+                    ^
+hello_world.c: In function 'timer_isr_function':
+hello_world.c:36:7: warning: unused variable 'timeCount' [-Wunused-variable]
+  int* timeCount = (int*) context;
+       ^
+Info: Compiling scchart.c to obj/default/scchart.o
+nios2-elf-gcc -xc -MP -MMD -c -I../pacemaker_project_bsp//HAL/inc -I../pacemaker_project_bsp/ -I../pacemaker_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/scchart.o scchart.c
+scchart.c: In function 'logic':
+scchart.c:82:23: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g140 = d->_g137 && d->_cg139 || d->_g138 && d->_cg141;
+                       ^
+scchart.c:136:20: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g12 = d->_g7 && d->_cg8 || d->_g14 && d->_cg12;
+                    ^
+scchart.c:137:31: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g8 = d->_g5 || d->_g149 && !d->_cg20;
+                               ^
+scchart.c:146:30: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g9 = d->_GO || d->_g21 && d->_cg22 || d->_g18 || d->_g4 && !d->_cg4;
+                              ^
+scchart.c:146:63: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g9 = d->_GO || d->_g21 && d->_cg22 || d->_g18 || d->_g4 && !d->_cg4;
+                                                               ^
+scchart.c:174:21: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g36 = d->_g39 && d->_cg35 || d->_g34 && d->_cg37;
+                     ^
+scchart.c:179:34: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g45_e2 = d->_GO || d->_g47 && !d->_cg48 || d->_g51 || d->_g50 && !d->_cg50;
+                                  ^
+scchart.c:179:69: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g45_e2 = d->_GO || d->_g47 && !d->_cg48 || d->_g51 || d->_g50 && !d->_cg50;
+                                                                     ^
+scchart.c:199:21: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g50 = d->_g51 && !d->_cg31 || d->_g39 && !d->_cg35;
+                     ^
+scchart.c:202:21: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g48 = d->_g34 && !d->_cg37 || d->_g27 && !d->_cg40;
+                     ^
+scchart.c:203:32: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g49 = d->_g36 || d->_g46 && !d->_cg46;
+                                ^
+scchart.c:227:21: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g64 = d->_g61 && d->_cg63 || d->_g62 && d->_cg65;
+                     ^
+scchart.c:232:34: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g64_e1 = d->_GO || d->_g72 && !d->_cg76 || d->_g55 && !d->_cg55;
+                                  ^
+scchart.c:232:58: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g64_e1 = d->_GO || d->_g72 && !d->_cg76 || d->_g55 && !d->_cg55;
+                                                          ^
+scchart.c:248:24: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g55 = d->_g73_e2 && !d->_cg59 || d->_g61 && !d->_cg63;
+                        ^
+scchart.c:251:21: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g77 = d->_g62 && !d->_cg65 || d->_g76 && !d->_cg68;
+                     ^
+scchart.c:252:32: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g56 = d->_g64 || d->_g46 && !d->_cg74;
+                                ^
+scchart.c:291:21: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g89 = d->_g84 && d->_cg85 || d->_g88 && d->_cg89;
+                     ^
+scchart.c:292:32: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g85 = d->_g94 || d->_g65 && !d->_cg97;
+                                ^
+scchart.c:301:31: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g96 = d->_GO || d->_g95 && d->_cg99 || d->_g98 || d->_g57 && !d->_cg81;
+                               ^
+scchart.c:301:65: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g96 = d->_GO || d->_g95 && d->_cg99 || d->_g98 || d->_g57 && !d->_cg81;
+                                                                 ^
+scchart.c:330:23: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g113 = d->_g110 && d->_cg112 || d->_g111 && d->_cg114;
+                       ^
+scchart.c:341:48: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g122 = d->_GO || d->_g113 || d->_g113_e1 && !d->_cg104;
+                                                ^
+scchart.c:361:23: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g105 = d->_g125 && !d->_cg108 || d->_g110 && !d->_cg112;
+                       ^
+scchart.c:364:23: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g112 = d->_g111 && !d->_cg114 || d->_g126 && !d->_cg117;
+                       ^
+scchart.c:365:35: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g108 = d->_g104 || d->_g123 && !d->_cg123;
+                                   ^
+scchart.c:366:48: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g117 = d->_GO || d->_g149_e2 || d->_g131 && !d->_cg131;
+                                                ^
+scchart.c:382:23: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g131 = d->_g106 && !d->_cg135 || d->_g137 && !d->_cg139;
+                       ^
+scchart.c:385:23: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g152 = d->_g138 && !d->_cg141 || d->_g154 && !d->_cg144;
+                       ^
+scchart.c:386:35: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+   d->_g153 = d->_g123 || d->_g150 && !d->_cg150;
+                                   ^
+Info: Linking pacemaker_project.elf
+nios2-elf-g++  -T'../pacemaker_project_bsp//linker.x' -msys-crt0='../pacemaker_project_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../pacemaker_project_bsp/   -Wl,-Map=pacemaker_project.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o pacemaker_project.elf obj/default/hello_world.o obj/default/scchart.o -lm -msys-lib=m
+nios2-elf-insert pacemaker_project.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name nios2_system --quartus_project_dir "H:/Documents/COMPSYS303/Uma/proN/DE2-115/DE2-115" --sopcinfo H:/Documents/COMPSYS303/Uma/proN/DE2-115/DE2-115/software/pacemaker_project_bsp/../../nios2_system.sopcinfo
+Info: (pacemaker_project.elf) 48 KBytes program size (code + initialized data).
+Info:                         8137 KBytes free for stack + heap.
+Info: Creating pacemaker_project.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source pacemaker_project.elf >pacemaker_project.objdump
+[pacemaker_project build complete]
+
+14:42:52 Build Finished (took 5s.234ms)
+
