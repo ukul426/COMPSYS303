@@ -66,11 +66,14 @@ typedef struct Movement {
     char turnDirection; // 'L' for left, 'R' for right, 'N' for no turn
 } Movement;
 
-//start at (1,3) end at  (9,1) in map2   
+//from point 0 to 1
 Movement path[10] = {
-    {5*CM_PER_BLOCK_VERT, 'R'}, 
+//    {3*CM_PER_BLOCK_VERT, 'R'}, 
+    {3*CM_PER_BLOCK_VERT, 'L'}, 
     {3*CM_PER_BLOCK_HORIZ, 'L'}, 
-    {5*CM_PER_BLOCK_VERT, 'N'}, 
+    {3*CM_PER_BLOCK_VERT, 'R'}, 
+    {5*CM_PER_BLOCK_HORIZ, 'N'}, 
+//    {2*CM_PER_BLOCK_VERT, 'N'},
 };
 typedef enum {
     NORTH,
@@ -310,8 +313,8 @@ void goStraight_cm(int distance){
             PWM_1_WriteCompare(PWM_1_ReadCompare() +1);
             
         }else if(comp1_sum==0 && comp0_sum==0){
-            PWM_1_WriteCompare(65);
-            PWM_2_WriteCompare(66);
+            PWM_1_WriteCompare(68);
+            PWM_2_WriteCompare(69);
         }else{
             reverse();
         }
@@ -380,21 +383,48 @@ int main(void)
 //    // Print the path
 //    printPath(endNode);
 //**************************************************    
-    int length = sizeof(path) / sizeof(path[0]);
+    
     
     //this loops through all the movement required in the path
     //movement contains distance for going straight and a turn
-    for(int i=0; i<length;i++){
-        goStraight_cm(path[i].distance);
-        if(path[i].turnDirection=='R'){
-            turnRight();
-        }else if(path[i].turnDirection=='L'){
-            turnLeft();
+    for(int i=0; i<7;i++){//length should be how many movements there should be
+        if(i!=0){
+            goStraight_cm(path[i].distance-6);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
         }else{
+            goStraight_cm(path[i].distance);
+        }
+        if(path[i].turnDirection=='R'){
+           while(Sout_R_Read()!=0){
+             goStraight();
+           }
+           turnRight();
+        }else if(path[i].turnDirection=='L'){
+           while(Sout_L_Read()!=0){
+             goStraight();
+           }
+           turnLeft();
+        }else if(path[i].turnDirection=='N'){
+            stop();
             break;
         }
     }
     stop();
+
+//    goStraight_cm(3*CM_PER_BLOCK_HORIZ);
+//    while(Sout_L_Read()!=0){
+//        goStraight();
+//    }
+//    turnLeft();
+//    goStraight_cm(3*CM_PER_BLOCK_VERT-6);
+//    while(Sout_R_Read()!=0){
+//        goStraight();
+//    }
+//    turnRight();
+//    goStraight_cm(5*CM_PER_BLOCK_HORIZ-6);
+//    stop();
+
+
+
    
 
     for(;;)
@@ -404,13 +434,10 @@ int main(void)
            //comp3=0 => right
            /* Place your application code here. */
         
-//        if(abs(QuadDec_M1_GetCounter()>860)){
-//            stop();
-//            break;
-//        }
-//
-//        
-//       
+
+
+        
+//______________________________________________________________________________      
 //        if(!isTurning ){//if not turning check the sensors
 //            if(Sout_M1_Read()==0 || Sout_M2_Read()==0){
 //                    current_state = GO_STRAIGHT;
@@ -442,7 +469,7 @@ int main(void)
 //                stop();
 //                break;
 //        }
-//             
+//________________________________________________________________________________             
 
     }
 }
