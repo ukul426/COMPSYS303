@@ -41,7 +41,6 @@ float wheelCircumference_cm = (M_PI*64.46)/10;// wheel circumference wheelDiamet
 double timeInterval_s = 10.924;  // Effective time interval( (timer period )2.731*4)
 int path_length;
 int counter=1;
-
 //define wheel speeds
 #define PWM_PERIOD 100
 #define PWM_STRAIGHT_L 131
@@ -75,6 +74,7 @@ Movement path[10] = {
     {5*CM_PER_BLOCK_HORIZ, 'N'}, 
 //    {2*CM_PER_BLOCK_VERT, 'N'},
 };
+Movement moveCountArray[10];
 typedef enum {
     NORTH,
     EAST,
@@ -91,6 +91,184 @@ typedef enum {
     STOP
 } RobotState;
 RobotState current_state = STOP;// intialse state
+
+
+//---------------------------------for direction();
+int currentX = 2;
+int currentY = 2;
+int stepCount = 0;
+int target[] = {14, 15};
+int position = -1;
+int pathCoordinates[15][2] = {
+    {2, 2},
+    {3, 2},
+    {4, 2},
+    {4, 3},
+    {4, 4},
+    {3, 4},
+    {2, 4},
+    {2, 5},
+    {2, 6},
+    {2, 7},
+    {2, 8},
+    {2, 9},
+    {2, 10},
+    {3, 10},
+    {4, 10},
+ 
+};
+RobotDirection current_direction =  SOUTH;
+//-----------------------------------------
+
+
+void direction() {//MAX_PATH_LENGTH  int pathCoordinates[11][2]
+    int pathLength = 15; 
+
+    for (int i = 0; i < pathLength; i++) {
+        int nextX = pathCoordinates[i][0];
+        int nextY = pathCoordinates[i][1];
+
+        // Calculate the change in position
+        int deltaX = nextX - currentX;
+        int deltaY = nextY - currentY;
+        
+        int targetX = target[0]; // Access the x-coordinat
+        int targetY = target[1]; // Access the y-coordinate
+
+
+        if(nextX == targetX && nextY == targetY ){
+                    stepCount++;
+                    moveCountArray[position].distance = stepCount;
+                    moveCountArray [position].turnDirection = 'E';
+                    break;
+        }
+        
+
+        switch (current_direction) {
+            case NORTH:
+                if (currentX > nextX && currentY == nextY) { 
+                    // Go straight
+                    stepCount++;
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    continue; 
+                } else if (deltaX == 0 && deltaY > 0) {
+                    // Turn right
+                    stepCount++;
+                    position++;
+                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
+                    moveCountArray [position].turnDirection = 'R';
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    stepCount = 0;
+                    current_direction = EAST;
+                } else if (deltaX == 0 && deltaY < 0) {
+                    // Turn left
+                    stepCount++;
+                    position++;
+                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
+                    moveCountArray [position].turnDirection = 'L';
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    stepCount = 0;
+                    current_direction = WEST;
+                }
+                break;
+                
+                
+            case EAST:
+                if (deltaX == 0 && deltaY > 0) { 
+                    // Go straight
+                    stepCount++;
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    continue; // Skip the rest of this iteration and go to the next
+                } else if (deltaX > 0 && deltaY == 0) {
+                    // Turn right
+                    stepCount++;
+                    position++;
+                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
+                    moveCountArray [position].turnDirection = 'R';
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    stepCount = 0;
+                    current_direction = SOUTH;   
+                } else if (deltaX < 0 && deltaY == 0) {
+                    // Turn left
+                    stepCount++;
+                    position++;
+                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
+                    moveCountArray [position].turnDirection = 'L';
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    stepCount = 0;
+                    current_direction = NORTH;
+                }
+                break;
+
+            case SOUTH:
+                if (deltaX > 0 && deltaY == 0) { 
+                    // Go straight
+                    stepCount++;
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    continue; 
+                } else if (deltaX == 0 && deltaY < 0) {
+                    // Turn right
+                    stepCount++;
+                    position++;
+                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
+                    moveCountArray [position].turnDirection = 'R';
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    stepCount = 0;
+                    current_direction = WEST;
+                } else if (deltaX == 0 && deltaY > 0) {
+                    // Turn left
+                    stepCount++;
+                    position++;
+                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
+                    moveCountArray [position].turnDirection = 'L';
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    stepCount = 0;
+                    current_direction = EAST;
+                }
+                break;
+                
+                
+            case WEST:
+                if (deltaX == 0 && deltaY < 0) { 
+                    // Go straight
+                    stepCount++;
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    continue; 
+                } else if (deltaX < 0 && deltaY == 0) {
+                    // Turn right
+                    stepCount++;
+                    position++;
+                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
+                    moveCountArray [position].turnDirection = 'R';
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    stepCount = 0;
+                    current_direction = NORTH;
+                } else if (deltaX > 0 && deltaY == 0) {
+                    // Turn left
+                    stepCount++;
+                    position++;
+                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
+                    moveCountArray [position].turnDirection = 'L';
+                    currentX = nextX; // Update currentX
+                    currentY = nextY;
+                    stepCount = 0;
+                    current_direction = SOUTH;
+                }
+                break;
+        }
+    }
+}
 
 void getMovements(int start_row,int start_column,int target_row, int target_column,RobotDirection current_direction){
     //calculate the path using Astar
@@ -383,27 +561,27 @@ int main(void)
 //    // Print the path
 //    printPath(endNode);
 //**************************************************    
-    
+    direction();
     
     //this loops through all the movement required in the path
     //movement contains distance for going straight and a turn
-    for(int i=0; i<7;i++){//length should be how many movements there should be
+    for(int i=0; i<16;i++){//length should be how many movements there should be
         if(i!=0){
-            goStraight_cm(path[i].distance-6);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
+            goStraight_cm(moveCountArray[i].distance-6);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
         }else{
             goStraight_cm(path[i].distance);
         }
-        if(path[i].turnDirection=='R'){
+        if(moveCountArray[i].turnDirection=='R'){
            while(Sout_R_Read()!=0){
              goStraight();
            }
            turnRight();
-        }else if(path[i].turnDirection=='L'){
+        }else if(moveCountArray[i].turnDirection=='L'){
            while(Sout_L_Read()!=0){
              goStraight();
            }
            turnLeft();
-        }else if(path[i].turnDirection=='N'){
+        }else if(moveCountArray[i].turnDirection=='E'){
             stop();
             break;
         }
