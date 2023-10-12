@@ -9,10 +9,17 @@ scchart Pacemaker {
   signal V_event, VR, A_event, AR
   bool inside_URI
   
-
+  host "int" AVI_Constraint = `AVI_VALUE`
+  host "int" PVARP_Constraint = `PVARP_VALUE`
+  host "int" VRP_Constraint = `VRP_VALUE`
+  host "int" AEI_Constraint = `AEI_VALUE`
+  host "int" LRI_Constraint = `LRI_VALUE`
+  host "int" URI_Constraint = `URI_VALUE`
+  
+  
+  
   region  AVI_timer{
     clock t = 0
-    host "int" AVI_Constraint = `AVI_VALUE`
    
     initial state idle
     if  A_event do t=0 go to wait
@@ -25,7 +32,6 @@ scchart Pacemaker {
   
   region  PVARP_timer{
     clock t = 0
-    host "int" PVARP_Constraint = `PVARP_VALUE`
     
     initial state idle
     if VS||pre(VP) do t=0 go to block
@@ -38,7 +44,7 @@ scchart Pacemaker {
   
   region  VRP_timer{
     clock t = 0
-    host "int" VRP_Constraint = `VRP_VALUE`
+    
     
     initial state idle
     if VS||pre(VP) do t=0; V_event go to block
@@ -49,9 +55,7 @@ scchart Pacemaker {
   }
   
     region  AEI_timer{
-    clock t = 0
-    host "int" AEI_Constraint = `AEI_VALUE`
-    
+    clock t = 0    
     initial state idle
     if V_event do t=0 go to wait
    
@@ -63,8 +67,7 @@ scchart Pacemaker {
  
     region  LRI_timer{
     clock t = 0
-    host "int" LRI_Constraint = `LRI_VALUE`
-   
+    
     initial state idle
     if V_event do t=0 go to wait   
     
@@ -78,12 +81,13 @@ scchart Pacemaker {
   
     region  URI_timer{
     clock t = 0
-    host "int" URI_Constraint = `URI_VALUE`
+    
     
     initial state idle
     if V_event do t=0; inside_URI= true go to wait
     
     state wait 
+    if V_event do t=0 go to wait
     if  t>=URI_Constraint do inside_URI= false go to idle
        
   }
