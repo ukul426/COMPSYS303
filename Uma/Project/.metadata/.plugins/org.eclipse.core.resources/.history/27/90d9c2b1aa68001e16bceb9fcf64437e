@@ -64,15 +64,13 @@ int main(){
 
 			if(model.AP) {
 				printf("AP\n");
-				IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b10);
 			}
-			else if(model.VP) {
+			if(model.VP) {
 				printf("VP\n");
-				IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b01);
 			}
-			else {
-				IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b00);
-			}
+
+			IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE &0x2, model.AP);
+			IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE &0x1, model.VP);
 		}
 	}
 
