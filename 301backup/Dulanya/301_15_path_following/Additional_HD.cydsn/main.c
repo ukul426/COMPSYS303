@@ -25,15 +25,8 @@
  *
  * ========================================
 */
-//WORKS 90% of the time
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <project.h>
-#include <stdbool.h>
-#include <math.h>
-#include <cytypes.h> 
-#include "Astar.h"
+
+#include "program.h"
 
 //distance calculation paras
 int32 CPR = 228;  // Adjusted for 4x resolution(228/4)
@@ -41,14 +34,7 @@ float wheelCircumference_cm = (M_PI*64.46)/10;// wheel circumference wheelDiamet
 double timeInterval_s = 10.924;  // Effective time interval( (timer period )2.731*4)
 int path_length;
 int counter=1;
-//define wheel speeds
-#define PWM_PERIOD 100
-#define PWM_STRAIGHT_L 131
-#define PWM_STRAIGHT_R 130
-#define PWM_STOP 100
-#define ENC_VALUE_PER_CM 11.3
-#define CM_PER_BLOCK_VERT 6
-#define CM_PER_BLOCK_HORIZ 10
+
 
 uint32 count = 0;
 bool isTurning=false;
@@ -58,12 +44,8 @@ uint8 comp1_sum;
 uint8 comp2_sum;
 uint8 comp3_sum;
 
-int path_coordinates[MAX_PATH_LENGTH][2];
 
-typedef struct Movement {
-    int distance;       // Distance to go straight in centimeters
-    char turnDirection; // 'L' for left, 'R' for right, 'N' for no turn
-} Movement;
+
 
 //from point 0 to 1
 Movement path[10] = {
@@ -75,21 +57,7 @@ Movement path[10] = {
 //    {2*CM_PER_BLOCK_VERT, 'N'},
 };
 Movement moveCountArray[10];
-typedef enum {
-    NORTH,
-    EAST,
-    SOUTH,
-    WEST
-} RobotDirection;
 
-
-// Define states for the state machine
-typedef enum {
-    GO_STRAIGHT,
-    TURN_LEFT,
-    TURN_RIGHT,
-    STOP
-} RobotState;
 RobotState current_state = STOP;// intialse state
 
 
@@ -99,319 +67,9 @@ int currentY = 2;
 int stepCount = 0;
 int target[] = {14, 15};
 int position = -1;
-int pathCoordinates[15][2] = {
-    {2, 2},
-    {3, 2},
-    {4, 2},
-    {4, 3},
-    {4, 4},
-    {3, 4},
-    {2, 4},
-    {2, 5},
-    {2, 6},
-    {2, 7},
-    {2, 8},
-    {2, 9},
-    {2, 10},
-    {3, 10},
-    {4, 10},
- 
-};
+
 RobotDirection current_direction =  SOUTH;
 //-----------------------------------------
-
-
-void direction() {//MAX_PATH_LENGTH  int pathCoordinates[11][2]
-    int pathLength = 15; 
-
-    for (int i = 0; i < pathLength; i++) {
-        int nextX = pathCoordinates[i][0];
-        int nextY = pathCoordinates[i][1];
-
-        // Calculate the change in position
-        int deltaX = nextX - currentX;
-        int deltaY = nextY - currentY;
-        
-        int targetX = target[0]; // Access the x-coordinat
-        int targetY = target[1]; // Access the y-coordinate
-
-
-        if(nextX == targetX && nextY == targetY ){
-                    stepCount++;
-                    moveCountArray[position].distance = stepCount;
-                    moveCountArray [position].turnDirection = 'E';
-                    break;
-        }
-        
-
-        switch (current_direction) {
-            case NORTH:
-                if (currentX > nextX && currentY == nextY) { 
-                    // Go straight
-                    stepCount++;
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    continue; 
-                } else if (deltaX == 0 && deltaY > 0) {
-                    // Turn right
-                    stepCount++;
-                    position++;
-                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
-                    moveCountArray [position].turnDirection = 'R';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    stepCount = 0;
-                    current_direction = EAST;
-                } else if (deltaX == 0 && deltaY < 0) {
-                    // Turn left
-                    stepCount++;
-                    position++;
-                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
-                    moveCountArray [position].turnDirection = 'L';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    stepCount = 0;
-                    current_direction = WEST;
-                }
-                break;
-                
-                
-            case EAST:
-                if (deltaX == 0 && deltaY > 0) { 
-                    // Go straight
-                    stepCount++;
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    continue; // Skip the rest of this iteration and go to the next
-                } else if (deltaX > 0 && deltaY == 0) {
-                    // Turn right
-                    stepCount++;
-                    position++;
-                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
-                    moveCountArray [position].turnDirection = 'R';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    stepCount = 0;
-                    current_direction = SOUTH;   
-                } else if (deltaX < 0 && deltaY == 0) {
-                    // Turn left
-                    stepCount++;
-                    position++;
-                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
-                    moveCountArray [position].turnDirection = 'L';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    stepCount = 0;
-                    current_direction = NORTH;
-                }
-                break;
-
-            case SOUTH:
-                if (deltaX > 0 && deltaY == 0) { 
-                    // Go straight
-                    stepCount++;
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    continue; 
-                } else if (deltaX == 0 && deltaY < 0) {
-                    // Turn right
-                    stepCount++;
-                    position++;
-                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
-                    moveCountArray [position].turnDirection = 'R';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    stepCount = 0;
-                    current_direction = WEST;
-                } else if (deltaX == 0 && deltaY > 0) {
-                    // Turn left
-                    stepCount++;
-                    position++;
-                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
-                    moveCountArray [position].turnDirection = 'L';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    stepCount = 0;
-                    current_direction = EAST;
-                }
-                break;
-                
-                
-            case WEST:
-                if (deltaX == 0 && deltaY < 0) { 
-                    // Go straight
-                    stepCount++;
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    continue; 
-                } else if (deltaX < 0 && deltaY == 0) {
-                    // Turn right
-                    stepCount++;
-                    position++;
-                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
-                    moveCountArray [position].turnDirection = 'R';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    stepCount = 0;
-                    current_direction = NORTH;
-                } else if (deltaX > 0 && deltaY == 0) {
-                    // Turn left
-                    stepCount++;
-                    position++;
-                    moveCountArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
-                    moveCountArray [position].turnDirection = 'L';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
-                    stepCount = 0;
-                    current_direction = SOUTH;
-                }
-                break;
-        }
-    }
-}
-
-void getMovements(int start_row,int start_column,int target_row, int target_column,RobotDirection current_direction){
-    //calculate the path using Astar
-    //save it to a array of coordinates =>path_coordinates
-    
-    int movement_count=0;
-    int stepCount=0;
-    char turn='N';
-    int current_row = start_row;
-    int current_column = start_column;
-    
-    for(int i=0;i<MAX_PATH_LENGTH;i++){//this should only run for number of coordinates
-        int next_row = path_coordinates[i][0];
-        int next_column = path_coordinates[i][1];
-        
-        if(target_column==next_column && target_row==next_column){
-            switch (current_direction) {
-                case NORTH:
-                     path[movement_count].distance=stepCount*CM_PER_BLOCK_VERT;
-                     path[movement_count].turnDirection='N';
-                     break;
-                case SOUTH:
-                     path[movement_count].distance=stepCount*CM_PER_BLOCK_VERT;
-                     path[movement_count].turnDirection='N';
-                    break;
-                case EAST:
-                     path[movement_count].distance=stepCount*CM_PER_BLOCK_HORIZ;
-                     path[movement_count].turnDirection='N';
-                    break;
-                case WEST:
-                     path[movement_count].distance=stepCount*CM_PER_BLOCK_HORIZ;
-                     path[movement_count].turnDirection='N';
-                    break;
-            }break;
-        }
-        
-        
-        
-
-        // Calculate the change in position
-        int deltaX = next_column - current_column;
-        int deltaY = next_row - current_row;
-    
-         switch (current_direction) {
-            
-             case NORTH:
-                 if (deltaX == 0 && deltaY < 0) {
-                    // Go straight up
-                    stepCount++;
-                     // Update currentvalues
-                    current_row = next_row;
-                    current_column = next_column;
-                    continue; // Skip the rest of this iteration and go to the next
-                } else if (deltaX > 0 && deltaY == 0) {
-                    // Turn right
-                    turn='R';
-                    current_direction=EAST;
-                    //set the next state
-                } else if (deltaX < 0 && deltaY == 0) {
-                    // Turn left
-                    turn='L';
-                    current_direction=WEST;
-                }
-                path[movement_count].distance=stepCount*CM_PER_BLOCK_VERT;
-                path[movement_count].turnDirection=turn;
-                movement_count++;
-                break;
-                    
-                 
-             case EAST:
-                if (deltaX > 0 && deltaY == 0) {
-                      // Go straight right
-                    stepCount++;
-                     // Update currentvalues
-                    current_row = next_row;
-                    current_column = next_column;
-                    continue; // Skip the rest of this iteration and go to the next
-                } else if (deltaX == 0 && deltaY > 0) {
-                    // Turn right
-                    turn='R';
-                    current_direction=SOUTH;
-                    //set the next state
-                } else if (deltaX == 0 && deltaY < 0) {
-                    // Turn left
-                    turn='L';
-                    current_direction=NORTH;
-                }
-                path[movement_count].distance=stepCount*CM_PER_BLOCK_HORIZ;
-                path[movement_count].turnDirection=turn;
-                movement_count++;
-                break;
-
-            case SOUTH:
-                if (deltaX == 0 && deltaY > 0) {
-                     // Go straight down
-                    stepCount++;
-                     // Update currentvalues
-                    current_row = next_row;
-                    current_column = next_column;
-                    continue;
-                } else if (deltaX > 0 && deltaY == 0) {
-                    // Turn right
-                    turn='R';
-                    current_direction=EAST;
-                   
-                } else if (deltaX< 0 && deltaY == 0) {
-                     // Turn left
-                    turn='L';
-                    current_direction=WEST;
-                }
-                path[movement_count].distance=stepCount*CM_PER_BLOCK_VERT;
-                path[movement_count].turnDirection=turn;
-                movement_count++;
-                break;
-                   
-                   
-            case WEST:
-                 if (deltaX <0 && deltaY == 0) {
-                     // Go straight left
-                    stepCount++;
-                     // Update currentvalues
-                    current_row = next_row;
-                    current_column = next_column;
-                    continue;
-                } else if (deltaX == 0 && deltaY < 0) {
-                    // Turn right
-                    turn='R';
-                    current_direction=NORTH;
-                   
-                } else if (deltaX == 0 && deltaY > 0) {
-                     // Turn left
-                    turn='L';
-                    current_direction=SOUTH;
-                }
-                path[movement_count].distance=stepCount*CM_PER_BLOCK_HORIZ;
-                path[movement_count].turnDirection=turn;
-                movement_count++;
-                break;
-            }
-        
-    }
-    
-}
 
 
 
@@ -524,8 +182,7 @@ int main(void)
     CyGlobalIntEnable; /* Enable global interrupts. */
 
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-    Timer_1_Start();
-    
+    Timer_1_Start(); 
     isr_1_StartEx(isr_1_handler);
     
     //start comparators
@@ -540,9 +197,7 @@ int main(void)
     PWM_1_Start();
     PWM_2_Start();
      
-    // write comparision int for MC33926 duty cycle must me larger than 10% and less than 90%
-
-    
+    // write comparision int for MC33926 duty cycle must me larger than 10% and less than 90%   
     PWM_1_WritePeriod(100);
     PWM_2_WritePeriod(100);
     
@@ -561,16 +216,17 @@ int main(void)
 //    // Print the path
 //    printPath(endNode);
 //**************************************************    
-    direction();
+    
+   getMovementArray(2,2,4,10,SOUTH);
     
     //this loops through all the movement required in the path
     //movement contains distance for going straight and a turn
     for(int i=0; i<16;i++){//length should be how many movements there should be
-        if(i!=0){
-            goStraight_cm(moveCountArray[i].distance-6);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
-        }else{
+//       if(i!=0){
+//            goStraight_cm(moveCountArray[i].distance-6);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
+//       }else{
             goStraight_cm(path[i].distance);
-        }
+//       }
         if(moveCountArray[i].turnDirection=='R'){
            while(Sout_R_Read()!=0){
              goStraight();
@@ -606,11 +262,13 @@ int main(void)
    
 
     for(;;)
-    {
-          //comp0 and comp1 =0  => straight
-           //comp2=0 => left
-           //comp3=0 => right
-           /* Place your application code here. */
+    {       
+           ////////////////////////////////////
+           //  comp0 and comp1=0 => straight //
+           //            comp2=0 => left     //
+           //            comp3=0 => right    //
+           ////////////////////////////////////
+       
         
 
 
@@ -652,4 +310,4 @@ int main(void)
     }
 }
 
-///* [] END OF FILE */
+
