@@ -1,6 +1,0 @@
-D:\Semester 2\COMPSYS 303 - Microcomputers and Embedded Systems\GITHUB\COMPSYS303\301backup\Uma\301_15_path_following\Additional_HD.cydsn\Additional_HD.cyprj|363e1a64-5647-4b7d-b4b9-9bb310b11fc4
-C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|ebb1d044-0057-4243-845e-be6a2226896c
-C:\Users\umasu\OneDrive\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|d6204f54-0607-43e2-8223-af6a47caacfc
-C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|0fe26b8c-600c-4924-a060-9e0c3e085a71
-C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|ebe54f71-c9b3-4330-b3f1-de06c24b3a4d
-C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|324993f7-d700-4003-a726-781430848b44

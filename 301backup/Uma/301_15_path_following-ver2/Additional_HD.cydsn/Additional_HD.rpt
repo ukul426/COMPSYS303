@@ -1,9 +1,0 @@
-Loading plugins phase: Elapsed time ==> 0s.203ms
-<CYPRESSTAG name="CyDsfit arguments...">
-cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p D:\Semester 2\COMPSYS 303 - Microcomputers and Embedded Systems\GITHUB\COMPSYS303\301backup\Uma\301_15_path_following\Additional_HD.cydsn\Additional_HD.cyprj -d CY8C5888LTI-LP097 -s D:\Semester 2\COMPSYS 303 - Microcomputers and Embedded Systems\GITHUB\COMPSYS303\301backup\Uma\301_15_path_following\Additional_HD.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
-</CYPRESSTAG>
-<CYPRESSTAG name="Design elaboration results...">
-ADD: sdb.M0052: error: Unable to find component "cy_boot_v6_10".
-
-</CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 1s.578ms

@@ -25,18 +25,8 @@
  *
  * ========================================
 */
-//WORKS 90% of the time
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <project.h>
-#include <stdbool.h>
-#include <math.h>
-#include <cytypes.h> 
-#include "Astar.h"
-#include "pathfinding.h"
 
-
+#include "program.h"
 
 //distance calculation paras
 int32 CPR = 228;  // Adjusted for 4x resolution(228/4)
@@ -45,14 +35,6 @@ double timeInterval_s = 10.924;  // Effective time interval( (timer period )2.73
 int path_length;
 int counter=1;
 
-//define wheel speeds
-#define PWM_PERIOD 100
-#define PWM_STRAIGHT_L 131
-#define PWM_STRAIGHT_R 130
-#define PWM_STOP 100
-#define ENC_VALUE_PER_CM 11.3
-//#define CM_PER_BLOCK_VERT 6
-//#define CM_PER_BLOCK_HORIZ 10
 
 uint32 count = 0;
 bool isTurning=false;
@@ -62,21 +44,32 @@ uint8 comp1_sum;
 uint8 comp2_sum;
 uint8 comp3_sum;
 
-int path_coordinates[MAX_PATH_LENGTH][2];
 
 
 
-// Define states for the state machine
-typedef enum {
-    GO_STRAIGHT,
-    TURN_LEFT,
-    TURN_RIGHT,
-    STOP
-} RobotState;
+//from point 0 to 1
+Movement path[10] = {
+//    {3*CM_PER_BLOCK_VERT, 'R'}, 
+    {3*CM_PER_BLOCK_VERT, 'L'}, 
+    {3*CM_PER_BLOCK_HORIZ, 'L'}, 
+    {3*CM_PER_BLOCK_VERT, 'R'}, 
+    {5*CM_PER_BLOCK_HORIZ, 'N'}, 
+//    {2*CM_PER_BLOCK_VERT, 'N'},
+};
+Movement moveCountArray[10];
+
 RobotState current_state = STOP;// intialse state
 
 
+//---------------------------------for direction();
+int currentX = 2;
+int currentY = 2;
+int stepCount = 0;
+int target[] = {14, 15};
+int position = -1;
 
+RobotDirection current_direction =  SOUTH;
+//-----------------------------------------
 
 
 
@@ -133,7 +126,6 @@ void turnRight(){
     while(!(Sout_M1_Read()==0 &&Sout_M1_Read()==0)){//wait while middle sensors off line
        ;;
     }
-    
     isTurning=false;
     PWM_1_WriteCompare(65);
     PWM_2_WriteCompare(66);
@@ -151,13 +143,14 @@ void goStraight_cm(int distance){
     
     while(QuadDec_M1_GetCounter()<(distance*ENC_VALUE_PER_CM)){
             //comp0==>middle left comp1==>middle right
-        if(comp1_sum==0 && comp0_sum==0){
-            PWM_1_WriteCompare(67);
-            PWM_2_WriteCompare(68);
-        }else if(comp0_sum==0 && comp1_sum>0){//s_MR out of line
-            PWM_1_WriteCompare(PWM_1_ReadCompare() +1);   
-        }else if(comp0_sum>0 && comp1_sum==0){//s_ML out of line
+        if(comp0_sum>0 && comp1_sum==0){//s_ML out of line
             PWM_2_WriteCompare(PWM_2_ReadCompare() +1);
+        }else if(comp0_sum==0 && comp1_sum>0){//s_MR out of line
+            PWM_1_WriteCompare(PWM_1_ReadCompare() +1);
+            
+        }else if(comp1_sum==0 && comp0_sum==0){
+            PWM_1_WriteCompare(68);
+            PWM_2_WriteCompare(69);
         }else{
             reverse();
         }
@@ -189,8 +182,7 @@ int main(void)
     CyGlobalIntEnable; /* Enable global interrupts. */
 
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-    Timer_1_Start();
-    
+    Timer_1_Start(); 
     isr_1_StartEx(isr_1_handler);
     
     //start comparators
@@ -205,9 +197,7 @@ int main(void)
     PWM_1_Start();
     PWM_2_Start();
      
-    // write comparision int for MC33926 duty cycle must me larger than 10% and less than 90%
-
-    
+    // write comparision int for MC33926 duty cycle must me larger than 10% and less than 90%   
     PWM_1_WritePeriod(100);
     PWM_2_WritePeriod(100);
     
@@ -226,58 +216,64 @@ int main(void)
 //    // Print the path
 //    printPath(endNode);
 //**************************************************    
-    getMovementArray();//call the pathfinding distance functuon    
     
-//    int length = sizeof(moveCountArray) / sizeof(moveCountArray[0]);
-//    
+   getMovementArray(2,2,4,10,SOUTH);
+    
     //this loops through all the movement required in the path
     //movement contains distance for going straight and a turn
-    for(int i=0; i<11;i++){
-        if(i!=0){
-            goStraight_cm(moveCountArray[i].distance-6);
-        }else{
-            goStraight_cm(moveCountArray[i].distance);
-        }
+    for(int i=0; i<16;i++){//length should be how many movements there should be
+//       if(i!=0){
+//            goStraight_cm(moveCountArray[i].distance-6);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
+//       }else{
+            goStraight_cm(path[i].distance);
+//       }
         if(moveCountArray[i].turnDirection=='R'){
-            while(Sout_R_Read()!=0){
-                goStraight();
-            }
-            turnRight();
+           while(Sout_R_Read()!=0){
+             goStraight();
+           }
+           turnRight();
         }else if(moveCountArray[i].turnDirection=='L'){
-             while(Sout_L_Read()!=0){
-                goStraight();
-            }
-            turnLeft();
+           while(Sout_L_Read()!=0){
+             goStraight();
+           }
+           turnLeft();
         }else if(moveCountArray[i].turnDirection=='E'){
             stop();
             break;
         }
     }
     stop();
-    
-//    goStraight_cm(18);
+
+//    goStraight_cm(3*CM_PER_BLOCK_HORIZ);
+//    while(Sout_L_Read()!=0){
+//        goStraight();
+//    }
 //    turnLeft();
-//    goStraight_cm(30);
-//    turnLeft();
-//    goStraight_cm(18);
+//    goStraight_cm(3*CM_PER_BLOCK_VERT-6);
+//    while(Sout_R_Read()!=0){
+//        goStraight();
+//    }
+//    turnRight();
+//    goStraight_cm(5*CM_PER_BLOCK_HORIZ-6);
 //    stop();
-//    goStraight_cm(moveCountArray[0].distance);
-    
+
+
+
+   
 
     for(;;)
-    {
-          //comp0 and comp1 =0  => straight
-           //comp2=0 => left
-           //comp3=0 => right
-           /* Place your application code here. */
+    {       
+           ////////////////////////////////////
+           //  comp0 and comp1=0 => straight //
+           //            comp2=0 => left     //
+           //            comp3=0 => right    //
+           ////////////////////////////////////
+       
         
-//        if(abs(QuadDec_M1_GetCounter()>860)){
-//            stop();
-//            break;
-//        }
-//
-//        
-//       
+
+
+        
+//______________________________________________________________________________      
 //        if(!isTurning ){//if not turning check the sensors
 //            if(Sout_M1_Read()==0 || Sout_M2_Read()==0){
 //                    current_state = GO_STRAIGHT;
@@ -309,9 +305,9 @@ int main(void)
 //                stop();
 //                break;
 //        }
-//             
+//________________________________________________________________________________             
 
     }
 }
 
-///* [] END OF FILE */
+
