@@ -1,6 +1,6 @@
--- Project:   D:\Semester 2\COMPSYS 303 - Microcomputers and Embedded Systems\GITHUB\COMPSYS303\301backup\Uma\301_15_path_following\Additional_HD.cydsn\Additional_HD.cyprj
--- Generated: 10/13/2023 18:56:18
--- PSoC Creator  4.2
+-- Project:   C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\303\COMPSYS303\301backup\Dulanya\301_15_path_following\Additional_HD.cydsn\Additional_HD.cyprj
+-- Generated: 10/12/2023 22:35:20
+-- PSoC Creator  4.4
 
 ENTITY Additional_HD IS
     PORT(

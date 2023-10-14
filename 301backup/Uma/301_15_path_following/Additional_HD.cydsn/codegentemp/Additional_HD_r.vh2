@@ -1,6 +1,6 @@
 -- Project:   Additional_HD
--- Generated: 10/13/2023 18:56:13
--- PSoC Creator  4.2
+-- Generated: 10/12/2023 22:35:18
+-- PSoC Creator  4.4
 
 ENTITY Additional_HD IS
     PORT(
