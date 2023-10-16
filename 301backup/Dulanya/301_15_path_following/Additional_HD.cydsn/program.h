@@ -9,8 +9,7 @@
  *
  * ========================================
 */
-#ifndef PROGRAM_H
-#define PROGRAM_H
+
 
 #include <stdio.h>
 #include <string.h>
@@ -28,9 +27,9 @@
 #define PWM_STRAIGHT_L 131
 #define PWM_STRAIGHT_R 130
 #define PWM_STOP 100
-#define ENC_VALUE_PER_CM 11.3
-#define CM_PER_BLOCK_VERT 6
-#define CM_PER_BLOCK_HORIZ 10
+#define ENC_VALUE_PER_CM 10.5
+#define CM_PER_BLOCK_VERT 1
+#define CM_PER_BLOCK_HORIZ 1
     
 
 
@@ -62,7 +61,7 @@ typedef enum {
 
 Movement movementArray[10];
 
-void getMovementArray(int startX,int startY,int targetX,int targetY,RobotDirection current_direction);
+void getMovementArray(int start_row,int start_column,int target_row,int target_column,RobotDirection current_direction);
 
 // Function prototypes
 Node* AStar(int startX, int startY, int targetX, int targetY);
@@ -70,5 +69,3 @@ void getPath(Node* endNode);
 double heuristic(int x1, int y1, int x2, int y2);
 bool isValid(int x, int y);
 
-#endif // PROGRAM_H
-/* [] END OF FILE */

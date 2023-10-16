@@ -1,24 +1,30 @@
 
 #include "program.h"
-int pathCoordinates[15][2] = {
-    {2, 2},
-    {3, 2},
-    {4, 2},
-    {4, 3},
-    {4, 4},
-    {3, 4},
-    {2, 4},
-    {2, 5},
-    {2, 6},
-    {2, 7},
-    {2, 8},
-    {2, 9},
-    {2, 10},
-    {3, 10},
-    {4, 10},
- 
-};
-
+int pathCoordinates[18][2];
+//=
+//{
+//    //the coordinates are y,x format
+//    {1, 1},
+//    {2, 1},
+//    {3, 1},
+//    {3, 2},
+//    {3, 3},
+//    {2, 3},
+//    {1, 3},
+//    {1, 4},
+//    {1, 5},
+//    {1, 6},
+//    {1, 7},
+//    {1, 8},
+//    {1, 9},
+//    {2 ,9},
+//    {3, 9},
+// 
+//};
+Movement movementArray[10];
+//    {12,'R'},
+//    {12,'R'}
+//};
 
 
 // Create a 2D array to store the path coordinate
@@ -53,10 +59,11 @@ double heuristic(int x1, int y1, int x2, int y2) {
 
 // Function to check if a position is valid
 bool isValid(int x, int y) {
-    return x >= 0 && x < MAP_ROWS && y >= 0 && y < MAP_COLS && map[x][y] == 0;
+    return x >= 0 && x < MAP_COLS && y >= 0 && y < MAP_ROWS && map[y][x] == 0;
 }
 
 // A* algorithm
+//input order are start row, column, target row, column
 Node* AStar(int startX, int startY, int targetX, int targetY) {
     
     // Initialize open and closed sets
@@ -152,6 +159,7 @@ Node* AStar(int startX, int startY, int targetX, int targetY) {
 }
 
 // Function to print the path
+//saves the path row,column
 void getPath(Node* endNode) {
     if (endNode == NULL) {
         printf("No path found.\n");
@@ -174,34 +182,37 @@ void getPath(Node* endNode) {
     }
     
     for(int j=i-1,k=0; j>=0;j--,k++){
-        pathCoordinates[k][0]=tempPath[j][0];
-        pathCoordinates[k][1]=tempPath[j][1];
+        pathCoordinates[k][1]=tempPath[j][0];
+        pathCoordinates[k][0]=tempPath[j][1];
     }
     
     pathLength=i;//update path length
 }
 
-void getMovementArray(int startX,int startY,int targetX,int targetY,RobotDirection current_direction) {//MAX_PATH_LENGTH  int pathCoordinates[11][2]
+//input order are start row, column, target row, column
+void getMovementArray(int start_row,int start_column,int target_row,int target_column,RobotDirection current_direction) {//MAX_PATH_LENGTH  int pathCoordinates[11][2]
     int pathLength = 20; 
     int stepCount = 0;
     int position = -1;
     
-    int currentX=startX;
-    int currentY=startY;
+    //naming error
+    int current_row=start_row;
+    int current_column=start_column;
 
     for (int i = 0; i < pathLength; i++) {
-        int nextX = pathCoordinates[i][0];
-        int nextY = pathCoordinates[i][1];
-
-        // Calculate the change in position
-        int deltaX = nextX - currentX;
-        int deltaY = nextY - currentY;
+        int next_row = pathCoordinates[i][0];
+        int next_column = pathCoordinates[i][1];
 
 
-        if(nextX == targetX && nextY == targetY ){
+
+        if(current_row == target_row && current_column == target_column ){
                     stepCount++;
                     position++;
-                    movementArray[position].distance = stepCount;
+                    if(current_direction==EAST ||current_direction==WEST){
+                        movementArray[position].distance = stepCount*CM_PER_BLOCK_HORIZ;
+                    }else{
+                        movementArray[position].distance = stepCount*CM_PER_BLOCK_VERT;
+                    }
                     movementArray[position].turnDirection = 'E';
                     break;
         }
@@ -209,30 +220,30 @@ void getMovementArray(int startX,int startY,int targetX,int targetY,RobotDirecti
 
         switch (current_direction) {
             case NORTH:
-                if (currentX > nextX && currentY == nextY) { 
+                if (next_row<current_row && next_column == current_column) { 
                     // Go straight
                     stepCount++;
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     continue; 
-                } else if (deltaX == 0 && deltaY > 0) {
+                } else if (next_row==current_row && next_column > current_column) {
                     // Turn right
                     stepCount++;
                     position++;
                     movementArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
                     movementArray[position].turnDirection = 'R';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     stepCount = 0;
                     current_direction = EAST;
-                } else if (deltaX == 0 && deltaY < 0) {
+                } else if (next_row==current_row && next_column < current_column) {
                     // Turn left
                     stepCount++;
                     position++;
                     movementArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
                     movementArray[position].turnDirection = 'L';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     stepCount = 0;
                     current_direction = WEST;
                 }
@@ -240,60 +251,60 @@ void getMovementArray(int startX,int startY,int targetX,int targetY,RobotDirecti
                 
                 
             case EAST:
-                if (deltaX == 0 && deltaY > 0) { 
+                if (next_row==current_row && next_column > current_column) { 
                     // Go straight
                     stepCount++;
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     continue; // Skip the rest of this iteration and go to the next
-                } else if (deltaX > 0 && deltaY == 0) {
+                } else if (next_row>current_row && next_column == current_column) {
                     // Turn right
                     stepCount++;
                     position++;
                     movementArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
                     movementArray[position].turnDirection = 'R';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     stepCount = 0;
                     current_direction = SOUTH;   
-                } else if (deltaX < 0 && deltaY == 0) {
+                } else if (next_row<current_row && next_column == current_column) {
                     // Turn left
                     stepCount++;
                     position++;
                     movementArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
                     movementArray[position].turnDirection = 'L';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     stepCount = 0;
                     current_direction = NORTH;
                 }
                 break;
 
             case SOUTH:
-                if (deltaX > 0 && deltaY == 0) { 
+                if (next_row>current_row && next_column == current_column) { 
                     // Go straight
                     stepCount++;
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     continue; 
-                } else if (deltaX == 0 && deltaY < 0) {
+                } else if (next_row==current_row && next_column < current_column) {
                     // Turn right
                     stepCount++;
                     position++;
                     movementArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
                     movementArray[position].turnDirection = 'R';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     stepCount = 0;
                     current_direction = WEST;
-                } else if (deltaX == 0 && deltaY > 0) {
+                } else if (next_row==current_row && next_column > current_column) {
                     // Turn left
                     stepCount++;
                     position++;
                     movementArray[position].distance = stepCount * CM_PER_BLOCK_VERT ;
                     movementArray[position].turnDirection = 'L';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     stepCount = 0;
                     current_direction = EAST;
                 }
@@ -301,30 +312,30 @@ void getMovementArray(int startX,int startY,int targetX,int targetY,RobotDirecti
                 
                 
             case WEST:
-                if (deltaX == 0 && deltaY < 0) { 
+                if (next_row==current_row && next_column < current_column) { 
                     // Go straight
                     stepCount++;
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     continue; 
-                } else if (deltaX < 0 && deltaY == 0) {
+                } else if (next_row<current_row && next_column == current_column) {
                     // Turn right
                     stepCount++;
                     position++;
                     movementArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
                     movementArray[position].turnDirection = 'R';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     stepCount = 0;
                     current_direction = NORTH;
-                } else if (deltaX > 0 && deltaY == 0) {
+                } else if (next_row>current_row && next_column == current_column) {
                     // Turn left
                     stepCount++;
                     position++;
                     movementArray[position].distance = stepCount * CM_PER_BLOCK_HORIZ;
                     movementArray[position].turnDirection = 'L';
-                    currentX = nextX; // Update currentX
-                    currentY = nextY;
+                    current_row = next_row; // Update coordinates
+                    current_column = next_column;
                     stepCount = 0;
                     current_direction = SOUTH;
                 }
@@ -332,20 +343,3 @@ void getMovementArray(int startX,int startY,int targetX,int targetY,RobotDirecti
         }
     }
 }
-
-//int main() {
-//    int startX = 1, startY = 1;
-//    int targetX = 5, targetY = 7;
-//
-//    Node* endNode = AStar(startX, startY, targetX, targetY);
-//
-//    // store the path in path coordinates
-//    getPath(endNode);
-//    int i=0;
-//    while (i<pathLength) {
-//        printf("(%d, %d) ", pathCoordinates[i][0],pathCoordinates[i][1]);
-//        i++;
-//    }
-//    
-//    return 0;
-//}

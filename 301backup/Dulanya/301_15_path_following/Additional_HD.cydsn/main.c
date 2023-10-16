@@ -33,7 +33,6 @@ int32 CPR = 228;  // Adjusted for 4x resolution(228/4)
 float wheelCircumference_cm = (M_PI*64.46)/10;// wheel circumference wheelDiameter_mm = 64.46)
 double timeInterval_s = 10.924;  // Effective time interval( (timer period )2.731*4)
 int path_length;
-int counter=1;
 
 
 uint32 count = 0;
@@ -44,32 +43,16 @@ uint8 comp1_sum;
 uint8 comp2_sum;
 uint8 comp3_sum;
 
-
-
-
-//from point 0 to 1
-Movement path[10] = {
-//    {3*CM_PER_BLOCK_VERT, 'R'}, 
-    {3*CM_PER_BLOCK_VERT, 'L'}, 
-    {3*CM_PER_BLOCK_HORIZ, 'L'}, 
-    {3*CM_PER_BLOCK_VERT, 'R'}, 
-    {5*CM_PER_BLOCK_HORIZ, 'N'}, 
-//    {2*CM_PER_BLOCK_VERT, 'N'},
-};
-Movement moveCountArray[10];
+//={
+//    {15,'L'},
+//    {18,'R'},
+//    {10,'R'},
+//    {18,'L'},
+//    {25,'E'},
+//    
+//};
 
 RobotState current_state = STOP;// intialse state
-
-
-//---------------------------------for direction();
-int currentX = 2;
-int currentY = 2;
-int stepCount = 0;
-int target[] = {14, 15};
-int position = -1;
-
-RobotDirection current_direction =  SOUTH;
-//-----------------------------------------
 
 
 
@@ -182,7 +165,8 @@ int main(void)
     CyGlobalIntEnable; /* Enable global interrupts. */
 
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-    Timer_1_Start(); 
+    Timer_1_Start();
+    
     isr_1_StartEx(isr_1_handler);
     
     //start comparators
@@ -197,7 +181,9 @@ int main(void)
     PWM_1_Start();
     PWM_2_Start();
      
-    // write comparision int for MC33926 duty cycle must me larger than 10% and less than 90%   
+    // write comparision int for MC33926 duty cycle must me larger than 10% and less than 90%
+
+    
     PWM_1_WritePeriod(100);
     PWM_2_WritePeriod(100);
     
@@ -216,59 +202,48 @@ int main(void)
 //    // Print the path
 //    printPath(endNode);
 //**************************************************    
-    
-   getMovementArray(2,2,4,10,SOUTH);
+     //takes in x ,y
+   getPath(AStar(1,1,7,1)); 
+   //takes in row,column
+   getMovementArray(1,1,1,7,SOUTH);
     
     //this loops through all the movement required in the path
     //movement contains distance for going straight and a turn
-    for(int i=0; i<16;i++){//length should be how many movements there should be
-//       if(i!=0){
-//            goStraight_cm(moveCountArray[i].distance-6);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
-//       }else{
-            goStraight_cm(path[i].distance);
-//       }
-        if(moveCountArray[i].turnDirection=='R'){
+    for(int i=0; i<11;i++){//length should be how many movements there should be
+        //if(i!=0){
+        //    goStraight_cm(path[i].distance-10);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
+        //}else{
+            goStraight_cm(movementArray[i].distance);
+        //}
+        if(movementArray[i].turnDirection=='R'){
            while(Sout_R_Read()!=0){
              goStraight();
            }
            turnRight();
-        }else if(moveCountArray[i].turnDirection=='L'){
+        }else if(movementArray[i].turnDirection=='L'){
            while(Sout_L_Read()!=0){
              goStraight();
            }
            turnLeft();
-        }else if(moveCountArray[i].turnDirection=='E'){
+        }else if(movementArray[i].turnDirection=='E'){
             stop();
             break;
         }
     }
+   
     stop();
-
-//    goStraight_cm(3*CM_PER_BLOCK_HORIZ);
-//    while(Sout_L_Read()!=0){
-//        goStraight();
-//    }
-//    turnLeft();
-//    goStraight_cm(3*CM_PER_BLOCK_VERT-6);
-//    while(Sout_R_Read()!=0){
-//        goStraight();
-//    }
-//    turnRight();
-//    goStraight_cm(5*CM_PER_BLOCK_HORIZ-6);
-//    stop();
-
-
+    
 
    
 
     for(;;)
-    {       
-           ////////////////////////////////////
-           //  comp0 and comp1=0 => straight //
-           //            comp2=0 => left     //
-           //            comp3=0 => right    //
-           ////////////////////////////////////
-       
+    {
+        
+           ////////////////////////////////////////
+           // comp0 and comp1 =0  => straight    // 
+           //           comp2 =0  => left        //
+           //           comp3 =0  => right       //
+           ////////////////////////////////////////
         
 
 
@@ -289,7 +264,7 @@ int main(void)
 //        }
 //        
 //        
-//
+// 
 //        
 //        switch (current_state) {
 //            case GO_STRAIGHT:
@@ -309,5 +284,6 @@ int main(void)
 
     }
 }
+
 
 
