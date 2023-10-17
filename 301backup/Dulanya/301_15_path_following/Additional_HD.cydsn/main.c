@@ -31,7 +31,7 @@
 //distance calculation paras
 int32 CPR = 228;  // Adjusted for 4x resolution(228/4)
 float wheelCircumference_cm = (M_PI*64.46)/10;// wheel circumference wheelDiameter_mm = 64.46)
-double timeInterval_s = 10.924;  // Effective time interval( (timer period )2.731*4)
+double timeInterval_s = 10.924; // Effective time interval( (timer period )2.731*4)
 int path_length;
 
 
@@ -42,15 +42,6 @@ uint8 comp0_sum;
 uint8 comp1_sum;
 uint8 comp2_sum;
 uint8 comp3_sum;
-
-//={
-//    {15,'L'},
-//    {18,'R'},
-//    {10,'R'},
-//    {18,'L'},
-//    {25,'E'},
-//    
-//};
 
 RobotState current_state = STOP;// intialse state
 
@@ -78,6 +69,16 @@ CY_ISR(isr_1_handler) {
     Timer_1_ReadStatusRegister();
 }
 
+void turn_180(){
+    QuadDec_M1_SetCounter(0);
+    PWM_1_WriteCompare(33);
+    PWM_2_WriteCompare(68);
+     while(abs(QuadDec_M1_GetCounter())<160){
+        ;;
+    }
+    PWM_1_WriteCompare(50);
+    PWM_2_WriteCompare(50);
+}
 
 void stop(){
     PWM_1_WriteCompare(50);
@@ -85,35 +86,50 @@ void stop(){
 }
 
 void turnLeft(){
+    QuadDec_M2_SetCounter(0);
     PWM_1_WriteCompare(68);
     PWM_2_WriteCompare(33);
-//    CyDelay(350);
-    while(Sout_L_Read()==0){//wait while left is on line
-       ;;
+     while(abs(QuadDec_M2_GetCounter())<50){
+        ;;
     }
-    while(!(Sout_M1_Read()==0 &&Sout_M1_Read()==0)){//wait while middle sensors off line
-       ;;
-    }
-    isTurning=false;
-    PWM_1_WriteCompare(65);
-    PWM_2_WriteCompare(66);
+    PWM_1_WriteCompare(50);
+    PWM_2_WriteCompare(50);
+//    PWM_1_WriteCompare(68);
+//    PWM_2_WriteCompare(33);
+////    CyDelay(350);
+//    while(Sout_L_Read()==0){//wait while left is on line
+//       ;;
+//    }
+//    while(!(Sout_M1_Read()==0 &&Sout_M1_Read()==0)){//wait while middle sensors off line
+//       ;;
+//    }
+//    isTurning=false;
+//    PWM_1_WriteCompare(65);
+//    PWM_2_WriteCompare(66);
 
 }
 
 void turnRight(){
+    QuadDec_M1_SetCounter(0);
     PWM_1_WriteCompare(33);
     PWM_2_WriteCompare(68);
-    while(Sout_R_Read()==0){//wait while right is on line
-       ;;
+     while(abs(QuadDec_M1_GetCounter())<55){
+        ;;
     }
-    while(!(Sout_M1_Read()==0 &&Sout_M1_Read()==0)){//wait while middle sensors off line
-       ;;
-    }
-    isTurning=false;
-    PWM_1_WriteCompare(65);
-    PWM_2_WriteCompare(66);
+    PWM_1_WriteCompare(50);
+    PWM_2_WriteCompare(50);
+//    PWM_1_WriteCompare(33);
+//    PWM_2_WriteCompare(68);
+//    while(Sout_R_Read()==0){//wait while right is on line
+//       ;;
+//    }
+//    while(!(Sout_M1_Read()==0 &&Sout_M1_Read()==0)){//wait while middle sensors off line
+//       ;;
+//    }
+//    isTurning=false;
+//    PWM_1_WriteCompare(65);
+//    PWM_2_WriteCompare(66);
 }
-
 
 void reverse(){
     PWM_1_WriteCompare(30);
@@ -151,8 +167,8 @@ void goStraight(){
         PWM_1_WriteCompare(PWM_1_ReadCompare() +1);
         
     }else if(comp1_sum==0 && comp0_sum==0){
-        PWM_1_WriteCompare(68);
-        PWM_2_WriteCompare(69);
+        PWM_1_WriteCompare(70);
+        PWM_2_WriteCompare(71);
     }else{
         reverse();
     }
@@ -191,25 +207,16 @@ int main(void)
     PWM_2_WriteCompare(50);
     QuadDec_M1_Start();
     QuadDec_M2_Start();
-    
-    
-//**********************************calculate path    
-//    int startX = 0, startY = 0;
-//    int targetX = 4, targetY = 4;
-//
-//    Node* endNode = AStar(startX, startY, targetX, targetY);
-//
-//    // Print the path
-//    printPath(endNode);
-//**************************************************    
-     //takes in x ,y
-   getPath(AStar(1,1,7,1)); 
+
+
+   //Find the shortest path from (start_Row, start_Column) to (targetrow, targetcolumn)
+   dijkstra(1,1, 13, 17);
    //takes in row,column
-   getMovementArray(1,1,1,7,SOUTH);
+   getMovementArray(1,1, 13, 17,SOUTH);
     
     //this loops through all the movement required in the path
     //movement contains distance for going straight and a turn
-    for(int i=0; i<11;i++){//length should be how many movements there should be
+    for(int i=0; i<30;i++){//length should be how many movements there should be
         //if(i!=0){
         //    goStraight_cm(path[i].distance-10);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
         //}else{
@@ -230,15 +237,47 @@ int main(void)
             break;
         }
     }
-   
+
+    turn_180();
     stop();
     
+   dijkstra(13,17, 1, 1);
+   //takes in row,column
+   getMovementArray(13,17,1,1,WEST);
+    
+    //this loops through all the movement required in the path
+    //movement contains distance for going straight and a turn
+    for(int i=0; i<30;i++){//length should be how many movements there should be
+        //if(i!=0){
+        //    goStraight_cm(path[i].distance-10);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
+        //}else{
+            goStraight_cm(movementArray[i].distance);
+        //}
+        if(movementArray[i].turnDirection=='R'){
+           while(Sout_R_Read()!=0){
+             goStraight();
+           }
+           turnRight();
+        }else if(movementArray[i].turnDirection=='L'){
+           while(Sout_L_Read()!=0){
+             goStraight();
+           }
+           turnLeft();
+        }else if(movementArray[i].turnDirection=='E'){
+            stop();
+            break;
+        }
+    }
+
+
+    stop();
+
 
    
 
     for(;;)
     {
-        
+          
            ////////////////////////////////////////
            // comp0 and comp1 =0  => straight    // 
            //           comp2 =0  => left        //
