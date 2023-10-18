@@ -2,6 +2,7 @@
 #include "program.h"
 
 Movement movementArray[25];
+RobotDirection robot_direction;
 
 
 // Define the grid map with obstacles (1) and open cells (0)
@@ -40,6 +41,9 @@ int pathLength = 0;
 // Trace the path from target to start
 Node path[ROWS * COLS];
 
+RobotDirection getCurrentDirection(){
+    return robot_direction;
+}
 
 // Function to check if a cell is within the map boundaries
 bool isValidCell(int x, int y) {
@@ -129,15 +133,15 @@ void dijkstra(int startX, int startY, int targetX, int targetY) {
 
 int getDistance_H(int stepCount){
     if(stepCount<4){
-        return stepCount*7.5;
+        return stepCount*7.9;
     }else if(stepCount<6){
-        return stepCount*9.5;
+        return stepCount*9.8;
     }else if(stepCount<8){
-        return stepCount*10.5;
+        return stepCount*10.7;
     }else if(stepCount<10){
-        return stepCount*11;
+        return stepCount*11.1;
     }else{
-        return stepCount*12;
+        return stepCount*11;
     }
     
 }
@@ -145,23 +149,24 @@ int getDistance_H(int stepCount){
 
 int getDistance_V(int stepCount){
     if(stepCount<4){
-        return stepCount*3;
+        return stepCount*5.5;
     }else if(stepCount<6){
-        return stepCount*6.5;
+        return stepCount*6.9;
     }else if(stepCount<8){
-        return stepCount*6.4;
+        return stepCount*7.3;
     }else if(stepCount<10){
-        return stepCount*7.4;
-    }else{
         return stepCount*7.7;
+    }else{
+        return stepCount*8;
     }
     
 }
 
 //input order are start row, column, target row, column
+//input order are start row, column, target row, column
 void getMovementArray(int start_row,int start_column,int target_row,int target_column,RobotDirection current_direction) {//MAX_PATH_LENGTH  int pathCoordinates[11][2]
 
-    int stepCount = 0;
+    int stepCount = -1;
     int position = -1;
     
     //naming error
@@ -183,7 +188,7 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
                         movementArray[position].distance = getDistance_V(stepCount);
                     }
                     movementArray[position].turnDirection = 'E';
-                    //robot_direction=current_direction;
+                    robot_direction=current_direction;
                     break;
         }
         
@@ -198,7 +203,7 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
                     continue; 
                 } else if (next_row==current_row && next_column > current_column) {
                     // Turn right
-                    stepCount++;
+                    stepCount+=2;
                     position++;
                     movementArray[position].distance = getDistance_V(stepCount);
                     movementArray[position].turnDirection = 'R';
@@ -208,7 +213,7 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
                     current_direction = EAST;
                 } else if (next_row==current_row && next_column < current_column) {
                     // Turn left
-                    stepCount++;
+                    stepCount+=2;
                     position++;
                     movementArray[position].distance =getDistance_V(stepCount);
                     movementArray[position].turnDirection = 'L';
@@ -229,7 +234,7 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
                     continue; // Skip the rest of this iteration and go to the next
                 } else if (next_row>current_row && next_column == current_column) {
                     // Turn right
-                    stepCount++;
+                    stepCount+=2;
                     position++;
                     movementArray[position].distance = getDistance_H(stepCount);
                     movementArray[position].turnDirection = 'R';
@@ -239,7 +244,7 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
                     current_direction = SOUTH;   
                 } else if (next_row<current_row && next_column == current_column) {
                     // Turn left
-                    stepCount++;
+                    stepCount+=2;
                     position++;
                     movementArray[position].distance = getDistance_H(stepCount);
                     movementArray[position].turnDirection = 'L';
@@ -259,7 +264,7 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
                     continue; 
                 } else if (next_row==current_row && next_column < current_column) {
                     // Turn right
-                    stepCount++;
+                    stepCount+=2;
                     position++;
                     movementArray[position].distance = getDistance_V(stepCount);
                     movementArray[position].turnDirection = 'R';
@@ -269,7 +274,7 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
                     current_direction = WEST;
                 } else if (next_row==current_row && next_column > current_column) {
                     // Turn left
-                    stepCount++;
+                    stepCount+=2;
                     position++;
                     movementArray[position].distance = getDistance_V(stepCount);
                     movementArray[position].turnDirection = 'L';
@@ -290,7 +295,7 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
                     continue; 
                 } else if (next_row<current_row && next_column == current_column) {
                     // Turn right
-                    stepCount++;
+                    stepCount+=2;
                     position++;
                     movementArray[position].distance = getDistance_H(stepCount);
                     movementArray[position].turnDirection = 'R';
@@ -300,7 +305,7 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
                     current_direction = NORTH;
                 } else if (next_row>current_row && next_column == current_column) {
                     // Turn left
-                    stepCount++;
+                    stepCount+=2;
                     position++;
                     movementArray[position].distance = getDistance_H(stepCount);
                     movementArray[position].turnDirection = 'L';
@@ -313,4 +318,3 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
         }
     }
 }
-

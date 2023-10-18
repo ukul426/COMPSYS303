@@ -58,27 +58,11 @@ typedef enum {
 
 extern Movement movementArray[25];
 
-//RobotDirection robot_direction=SOUTH;
 
-//int food_list[6][2]= {
-//{7,9},
-//{5,3},
-//{1,3},
-//{11,7},
-//{17,1},
-//{15,13}
-//};
-//
-//RobotDirection startDirectionArray[5]={
-//    EAST,
-//    SOUTH,
-//    EAST,
-//    NORTH,
-//    SOUTH
-//    
-//};
+
 
 // Function prototypes
 void getMovementArray(int start_row,int start_column,int target_row,int target_column,RobotDirection current_direction);
 bool isValidCell(int x, int y);
 void dijkstra(int startX, int startY, int targetX, int targetY);
+RobotDirection getCurrentDirection();

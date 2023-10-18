@@ -43,6 +43,25 @@ uint8 comp1_sum;
 uint8 comp2_sum;
 uint8 comp3_sum;
 
+
+int food_list[6][2]= {
+{9,7},
+{3,5},
+{3,1},
+{7,11},
+{1,17},
+{13,15}
+};
+//
+RobotDirection startDirectionArray[5]={
+    EAST,
+    SOUTH,
+    EAST,
+    NORTH,
+    WEST
+    
+};
+
 RobotState current_state = STOP;// intialse state
 
 
@@ -69,16 +88,7 @@ CY_ISR(isr_1_handler) {
     Timer_1_ReadStatusRegister();
 }
 
-void turn_180(){
-    QuadDec_M1_SetCounter(0);
-    PWM_1_WriteCompare(33);
-    PWM_2_WriteCompare(68);
-     while(abs(QuadDec_M1_GetCounter())<160){
-        ;;
-    }
-    PWM_1_WriteCompare(50);
-    PWM_2_WriteCompare(50);
-}
+
 
 void stop(){
     PWM_1_WriteCompare(50);
@@ -134,6 +144,22 @@ void turnRight(){
 void reverse(){
     PWM_1_WriteCompare(30);
     PWM_2_WriteCompare(30);
+}
+void turn_180(){
+    QuadDec_M1_SetCounter(0);
+    PWM_1_WriteCompare(33);
+    PWM_2_WriteCompare(68);
+     while(abs(QuadDec_M1_GetCounter())<160){
+        ;;
+    }
+    PWM_1_WriteCompare(50);
+    PWM_2_WriteCompare(50);
+    QuadDec_M1_SetCounter(0);
+    reverse();
+    while(abs(QuadDec_M1_GetCounter())<100){
+        ;;
+    }
+    
 }
 
 void goStraight_cm(int distance){
@@ -277,6 +303,10 @@ int main(void)
 
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
     Timer_1_Start();
+//    
+//    LED_1_Write(1);
+//    LED_2_Write(1);
+//    LED_3_Write(1);
     
     isr_1_StartEx(isr_1_handler);
     
@@ -303,88 +333,53 @@ int main(void)
     QuadDec_M1_Start();
     QuadDec_M2_Start();
 
-//
-//   dijkstra(food_list[0][1],food_list[0][0], food_list[1][1],food_list[1][0]);
-//   //takes in row,column
-//   getMovementArray(food_list[0][1],food_list[0][0], food_list[1][1],food_list[1][0],startDirectionArray[0]);
-        // Find the shortest path from (startX, startY) to (targetX, targetY)
-   dijkstra(1,1, 1, 7);
-   //takes in row,column
-   getMovementArray(1,1, 1, 7,SOUTH);
+for(int i=0;i<5;i++){
+   //find path coordinates
+   dijkstra(food_list[i][0],food_list[i][1], food_list[i+1][0],food_list[i+1][1]);
+   //takes in row,column, gets the movement array
+   getMovementArray(food_list[i][0],food_list[i][1], food_list[i+1][0],food_list[i+1][1],startDirectionArray[i]);
+
+
     
     //this loops through all the movement required in the path
     //movement contains distance for going straight and a turn
     for(int i=0; i<40;i++){//length should be how many movements there should be
-        //if(i!=0){
-        //    goStraight_cm(path[i].distance-10);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
-        //}else{
+        if(i!=0){
+            goStraight_cm(movementArray[i].distance-5);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
+        }else{
             goStraight_cm(movementArray[i].distance);
-        //}
-        if(movementArray[i].turnDirection=='R'){
-           while(Sout_R_Read()!=0){
-             goStraight();
-           }
-           turnRight();
-        }else if(movementArray[i].turnDirection=='L'){
-           while(Sout_L_Read()!=0){
-             goStraight();
-           }
-         
-             turnLeft();
-        }else if(movementArray[i].turnDirection=='E'){
-            stop();
-            break;
         }
-    }
-
-    stop();
-    
-    turn_180();
-    
-//    changeDirection(robot_direction,startDirectionArray[1]);
-   // changeDirection(robot_direction,SOUTH);
-    
-//   dijkstra(food_list[1][1],food_list[1][0], food_list[2][1],food_list[2][0]);
-//   //takes in row,column
-//   getMovementArray(food_list[1][1],food_list[1][0], food_list[2][1],food_list[2][0],startDirectionArray[1]);
-//        // Find the shortest path from (startX, startY) to (targetX, targetY)
-     dijkstra(1,5, 9, 1);
-     //takes in row,column
-     getMovementArray(1,5, 9, 1,WEST);
-    
-    //this loops through all the movement required in the path
-    //movement contains distance for going straight and a turn
-    for(int i=0; i<30;i++){//length should be how many movements there should be
-        //if(i!=0){
-        //    goStraight_cm(path[i].distance-10);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
-        //}else{
-            goStraight_cm(movementArray[i].distance);
-        //}
         if(movementArray[i].turnDirection=='R'){
            while(Sout_R_Read()!=0){
              goStraight();
            }
            if(Sout_R_Read()==0){
-             turnRight();
+              turnRight();
            }
         }else if(movementArray[i].turnDirection=='L'){
            while(Sout_L_Read()!=0){
              goStraight();
            }
            if(Sout_L_Read()==0){
-             turnLeft();
+              turnLeft();
            }
         }else if(movementArray[i].turnDirection=='E'){
+            goStraight_cm(3);
             stop();
             break;
         }
     }
 
-
     stop();
+    if(i!=4){//if last point no need to change direction
+         changeDirection(getCurrentDirection(),startDirectionArray[i+1]);
+    }
+    
+}
+    
+    
+    
 
-
-   
 
     for(;;)
     {
