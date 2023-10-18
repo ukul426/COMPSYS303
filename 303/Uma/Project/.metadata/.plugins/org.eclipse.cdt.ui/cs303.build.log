@@ -1,96 +1,9 @@
-22:16:42 **** Incremental Build of configuration Nios II for project cs303 ****
+22:37:38 **** Incremental Build of configuration Nios II for project cs303 ****
 make all 
 Info: Building ../cs303_bsp/
 C:/intelFPGA/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../cs303_bsp/
 [BSP build complete]
-Info: Compiling hello_world.c to obj/default/hello_world.o
-nios2-elf-gcc -xc -MP -MMD -c -I../cs303_bsp//HAL/inc -I../cs303_bsp/ -I../cs303_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world.o hello_world.c
-hello_world.c: In function 'main':
-hello_world.c:183:62: warning: passing argument 3 of 'alt_alarm_start' from incompatible pointer type [-Wincompatible-pointer-types]
-                       alt_alarm_start(&avi_timer, AVI_VALUE, avi_timer_isr, NULL);
-                                                              ^
-In file included from hello_world.c:20:0:
-../cs303_bsp//HAL/inc/sys/alt_alarm.h:67:12: note: expected 'alt_u32 (*)(void *) {aka long unsigned int (*)(void *)}' but argument is of type 'void (*)(void *)'
- extern int alt_alarm_start (alt_alarm* the_alarm, 
-            ^
-hello_world.c:191:39: error: invalid operands to binary == (have 'alt_alarm {aka struct alt_alarm_s}' and 'int')
-                   }else if((avi_timer == 1) && (!inside_URI)) {
-                                       ^
-hello_world.c:202:62: warning: passing argument 3 of 'alt_alarm_start' from incompatible pointer type [-Wincompatible-pointer-types]
-                       alt_alarm_start(&aei_timer, AEI_VALUE, aei_timer_isr, NULL);
-                                                              ^
-In file included from hello_world.c:20:0:
-../cs303_bsp//HAL/inc/sys/alt_alarm.h:67:12: note: expected 'alt_u32 (*)(void *) {aka long unsigned int (*)(void *)}' but argument is of type 'void (*)(void *)'
- extern int alt_alarm_start (alt_alarm* the_alarm, 
-            ^
-hello_world.c:210:38: error: invalid operands to binary == (have 'alt_alarm {aka struct alt_alarm_s}' and 'int')
-                   }else if(aei_timer == 1) {
-                                      ^
-hello_world.c:221:62: warning: passing argument 3 of 'alt_alarm_start' from incompatible pointer type [-Wincompatible-pointer-types]
-                       alt_alarm_start(&lri_timer, LRI_VALUE, lri_timer_isr, NULL);
-                                                              ^
-In file included from hello_world.c:20:0:
-../cs303_bsp//HAL/inc/sys/alt_alarm.h:67:12: note: expected 'alt_u32 (*)(void *) {aka long unsigned int (*)(void *)}' but argument is of type 'void (*)(void *)'
- extern int alt_alarm_start (alt_alarm* the_alarm, 
-            ^
-hello_world.c:228:62: warning: passing argument 3 of 'alt_alarm_start' from incompatible pointer type [-Wincompatible-pointer-types]
-                       alt_alarm_start(&lri_timer, LRI_VALUE, lri_timer_isr, NULL);
-                                                              ^
-In file included from hello_world.c:20:0:
-../cs303_bsp//HAL/inc/sys/alt_alarm.h:67:12: note: expected 'alt_u32 (*)(void *) {aka long unsigned int (*)(void *)}' but argument is of type 'void (*)(void *)'
- extern int alt_alarm_start (alt_alarm* the_alarm, 
-            ^
-hello_world.c:230:38: error: invalid operands to binary == (have 'alt_alarm {aka struct alt_alarm_s}' and 'int')
-                   }else if(lri_timer == 1) {
-                                      ^
-hello_world.c:243:62: warning: passing argument 3 of 'alt_alarm_start' from incompatible pointer type [-Wincompatible-pointer-types]
-                       alt_alarm_start(&uri_timer, URI_VALUE, uri_timer_isr, NULL);
-                                                              ^
-In file included from hello_world.c:20:0:
-../cs303_bsp//HAL/inc/sys/alt_alarm.h:67:12: note: expected 'alt_u32 (*)(void *) {aka long unsigned int (*)(void *)}' but argument is of type 'void (*)(void *)'
- extern int alt_alarm_start (alt_alarm* the_alarm, 
-            ^
-hello_world.c:251:62: warning: passing argument 3 of 'alt_alarm_start' from incompatible pointer type [-Wincompatible-pointer-types]
-                       alt_alarm_start(&uri_timer, URI_VALUE, uri_timer_isr, NULL);
-                                                              ^
-In file included from hello_world.c:20:0:
-../cs303_bsp//HAL/inc/sys/alt_alarm.h:67:12: note: expected 'alt_u32 (*)(void *) {aka long unsigned int (*)(void *)}' but argument is of type 'void (*)(void *)'
- extern int alt_alarm_start (alt_alarm* the_alarm, 
-            ^
-hello_world.c:253:38: error: invalid operands to binary == (have 'alt_alarm {aka struct alt_alarm_s}' and 'int')
-                   }else if(uri_timer == 1) {
-                                      ^
-hello_world.c:268:66: warning: passing argument 3 of 'alt_alarm_start' from incompatible pointer type [-Wincompatible-pointer-types]
-                       alt_alarm_start(&pvarp_timer, PVARP_VALUE, pvarp_timer_isr, NULL);
-                                                                  ^
-In file included from hello_world.c:20:0:
-../cs303_bsp//HAL/inc/sys/alt_alarm.h:67:12: note: expected 'alt_u32 (*)(void *) {aka long unsigned int (*)(void *)}' but argument is of type 'void (*)(void *, alt_u32) {aka void (*)(void *, long unsigned int)}'
- extern int alt_alarm_start (alt_alarm* the_alarm, 
-            ^
-hello_world.c:277:40: error: invalid operands to binary == (have 'alt_alarm {aka struct alt_alarm_s}' and 'int')
-                   }else if(pvarp_timer == 1) {
-                                        ^
-hello_world.c:288:39: warning: passing argument 1 of 'alt_alarm_start' from incompatible pointer type [-Wincompatible-pointer-types]
-                       alt_alarm_start(&vrp_timer, VRP_VALUE, vrp_timer_isr, NULL);
-                                       ^
-In file included from hello_world.c:20:0:
-../cs303_bsp//HAL/inc/sys/alt_alarm.h:67:12: note: expected 'alt_alarm * {aka struct alt_alarm_s *}' but argument is of type 'int *'
- extern int alt_alarm_start (alt_alarm* the_alarm, 
-            ^
-hello_world.c:288:62: warning: passing argument 3 of 'alt_alarm_start' from incompatible pointer type [-Wincompatible-pointer-types]
-                       alt_alarm_start(&vrp_timer, VRP_VALUE, vrp_timer_isr, NULL);
-                                                              ^
-In file included from hello_world.c:20:0:
-../cs303_bsp//HAL/inc/sys/alt_alarm.h:67:12: note: expected 'alt_u32 (*)(void *) {aka long unsigned int (*)(void *)}' but argument is of type 'void (*)(void *, alt_u32) {aka void (*)(void *, long unsigned int)}'
- extern int alt_alarm_start (alt_alarm* the_alarm, 
-            ^
-hello_world.c:127:6: warning: unused variable 'timeCountMain' [-Wunused-variable]
-  int timeCountMain = 0;
-      ^
-hello_world.c:126:47: warning: unused variable 'var_timer' [-Wunused-variable]
-  alt_alarm avi_timer, aei_timer, pvarp_timer, var_timer, lri_timer, uri_timer;
-                                               ^
-make: *** [obj/default/hello_world.o] Error 1
+[cs303 build complete]
 
-22:16:43 Build Finished (took 992ms)
+22:37:39 Build Finished (took 890ms)
 
