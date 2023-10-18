@@ -1,0 +1,40 @@
+// Online C compiler to run C program online
+
+
+
+
+// Example timeout values in milliseconds
+#define AVI_VALUE 300
+#define AEI_VALUE 800
+#define PVARP_VALUE 50
+#define VRP_VALUE 150
+#define LRI_VALUE 950
+#define URI_VALUE 900
+
+int AS = 0, VS = 0, AP = 0, VP = 0 ,V_event = 0, VR = 0, A_event = 0, AR = 0;
+bool inside_URI = false;
+ 
+
+
+
+
+
+int main() {
+    
+  avi_current_state =  AVI_IDLE,  aei_current_state = AEI_IDLE, lri_current_state = LRI_IDLE, uri_current_state = URI_IDLE, pvarp_current_state = PVARP_IDLE, vrp_current_state = VAR_IDLE;
+  
+    
+    
+
+        
+
+
+            
+        // Sleep to simulate time passing
+        usleep(1000);
+    }
+    
+  
+
+    return 0;
+}
