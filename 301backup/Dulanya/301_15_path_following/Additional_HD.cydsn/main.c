@@ -111,7 +111,7 @@ void turnLeft(){
 
 void turnRight(){
     QuadDec_M1_SetCounter(0);
-    PWM_1_WriteCompare(33);
+    PWM_1_WriteCompare(30);
     PWM_2_WriteCompare(68);
      while(abs(QuadDec_M1_GetCounter())<55){
         ;;
@@ -155,6 +155,101 @@ void goStraight_cm(int distance){
         }
     }
     stop();
+    
+}
+
+void changeDirection(RobotDirection startDirection, RobotDirection endDirection){
+
+        switch(startDirection){
+            case NORTH:
+                 switch(endDirection){
+                    case NORTH:
+                         
+                         break;
+                   
+                    case SOUTH:
+                         turn_180();
+                         break;
+                
+                    case EAST:
+                        turnRight();
+                         break;
+                    
+                    case WEST:
+                        turnLeft();
+                         break;
+                    
+                 }
+            
+                 break;
+            
+            case SOUTH:
+                switch(endDirection){
+                    case NORTH:
+                         turn_180();
+                         break;
+                   
+                    case SOUTH:
+                         
+                         break;
+                
+                    case EAST:
+                         turnLeft();
+                         break;
+                    
+                    case WEST:
+                         turnRight();
+                         break;
+                    
+                 }
+            
+                 break;
+            
+            case EAST:
+                switch(endDirection){
+                    case NORTH:
+                         turnLeft();
+                         break;
+                   
+                    case SOUTH:
+                         turnRight();
+                         break;
+                
+                    case EAST:
+                        
+                         break;
+                    
+                    case WEST:
+                         turn_180();
+                         break;
+                    
+                 }
+            
+                 break;
+            
+            case WEST:
+                switch(endDirection){
+                    case NORTH:
+                         turnRight();
+                         break;
+                   
+                    case SOUTH:
+                         turnLeft();
+                         break;
+                
+                    case EAST:
+                         turn_180();
+                         break;
+                    
+                    case WEST:
+                    
+                         break;
+                    
+                 }
+            
+                 break;
+            
+        }
     
 }
 
@@ -208,15 +303,18 @@ int main(void)
     QuadDec_M1_Start();
     QuadDec_M2_Start();
 
-
-   //Find the shortest path from (start_Row, start_Column) to (targetrow, targetcolumn)
-   dijkstra(1,1, 13, 17);
+//
+//   dijkstra(food_list[0][1],food_list[0][0], food_list[1][1],food_list[1][0]);
+//   //takes in row,column
+//   getMovementArray(food_list[0][1],food_list[0][0], food_list[1][1],food_list[1][0],startDirectionArray[0]);
+        // Find the shortest path from (startX, startY) to (targetX, targetY)
+   dijkstra(1,1, 1, 7);
    //takes in row,column
-   getMovementArray(1,1, 13, 17,SOUTH);
+   getMovementArray(1,1, 1, 7,SOUTH);
     
     //this loops through all the movement required in the path
     //movement contains distance for going straight and a turn
-    for(int i=0; i<30;i++){//length should be how many movements there should be
+    for(int i=0; i<40;i++){//length should be how many movements there should be
         //if(i!=0){
         //    goStraight_cm(path[i].distance-10);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
         //}else{
@@ -231,19 +329,28 @@ int main(void)
            while(Sout_L_Read()!=0){
              goStraight();
            }
-           turnLeft();
+         
+             turnLeft();
         }else if(movementArray[i].turnDirection=='E'){
             stop();
             break;
         }
     }
 
-    turn_180();
     stop();
     
-   dijkstra(13,17, 1, 1);
-   //takes in row,column
-   getMovementArray(13,17,1,1,WEST);
+    turn_180();
+    
+//    changeDirection(robot_direction,startDirectionArray[1]);
+   // changeDirection(robot_direction,SOUTH);
+    
+//   dijkstra(food_list[1][1],food_list[1][0], food_list[2][1],food_list[2][0]);
+//   //takes in row,column
+//   getMovementArray(food_list[1][1],food_list[1][0], food_list[2][1],food_list[2][0],startDirectionArray[1]);
+//        // Find the shortest path from (startX, startY) to (targetX, targetY)
+     dijkstra(1,5, 9, 1);
+     //takes in row,column
+     getMovementArray(1,5, 9, 1,WEST);
     
     //this loops through all the movement required in the path
     //movement contains distance for going straight and a turn
@@ -257,12 +364,16 @@ int main(void)
            while(Sout_R_Read()!=0){
              goStraight();
            }
-           turnRight();
+           if(Sout_R_Read()==0){
+             turnRight();
+           }
         }else if(movementArray[i].turnDirection=='L'){
            while(Sout_L_Read()!=0){
              goStraight();
            }
-           turnLeft();
+           if(Sout_L_Read()==0){
+             turnLeft();
+           }
         }else if(movementArray[i].turnDirection=='E'){
             stop();
             break;
