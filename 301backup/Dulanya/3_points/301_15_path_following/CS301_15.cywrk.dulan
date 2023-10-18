@@ -305,7 +305,7 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\Additional_HD.cydsn\main.c" />
+<name v=".\Additional_HD.cydsn\functions.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -313,7 +313,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1213, 485" SelectedTabbedMdiWindow="6056224b-455c-4dff-a380-ac6f37a55668"><DocumentWindow Key="C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\301\COMPSYS301\Dulanya\3_points\301_15_path_following\Additional_HD.cydsn\main.c" Guid="6056224b-455c-4dff-a380-ac6f37a55668" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1213, 485" SelectedTabbedMdiWindow="503fcb1a-6c40-4708-8f55-d203535c5497"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="041c6fd3-e180-45cc-92a9-b934e1531784" /><DocumentWindow Key="C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\303\COMPSYS303\301backup\Dulanya\3_points\301_15_path_following\Additional_HD.cydsn\functions.c" Guid="503fcb1a-6c40-4708-8f55-d203535c5497" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

@@ -49,6 +49,9 @@ int main(){
 	alt_alarm_start(&timer, 10, timer_isr_function, NULL);//start the timer, with timeout of 100 milli-seconds
 
 
+	char AS='A';
+	char VS='V';
+
 	while (1) {
 		if(doTick) {
 			doTick = 0;
@@ -58,11 +61,11 @@ int main(){
 		    int bytes_read = read(uart_fd, &uart_data, 1);
 
 		    if(bytes_read!=0){
-		    	if(bytes_read=='A'){
+		    	if(uart_data=='A'){
 
 		    		model.AS=1;
 
-		    	}else if(bytes_read=='V'){
+		    	}else if(uart_data=='V'){
 
 		    		model.VS=1;
 
@@ -84,11 +87,11 @@ int main(){
 
 			if(model.AP) {
 				printf("AP\n");
-				write(uart_fd,"A",1);
+				write(uart_fd,&AS,1);
 			}
 			else if(model.VP) {
 				printf("VP\n");
-				write(uart_fd,"V",1);
+				write(uart_fd,&VS,1);
 			}
 
 
