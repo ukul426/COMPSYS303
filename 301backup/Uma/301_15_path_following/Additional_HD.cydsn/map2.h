@@ -30,12 +30,12 @@ unsigned char map[15][19] = {
 
 unsigned char start_pos[2] = {1,1};
 
-unsigned char food_list[5][2]= {
-	{1,9},
-	{5,5},
-	{7,1},
-	{13,5},
-	{9,9}
-};
+//unsigned char food_list[5][2]= {
+//	{1,9},
+//	{5,5},
+//	{7,1},
+//	{13,5},
+//	{9,9}
+//};
 
 /* [] END OF FILE */

@@ -362,6 +362,10 @@
 <dep name=".\program.h" />
 </file>
 <file name=".\main.c" />
+<file name=".\CortexM3\ARM_GCC_541\Debug\comments.o">
+<dep name=".\comments.c" />
+</file>
+<file name=".\comments.c" />
 <file name=".\CortexM3\ARM_GCC_541\Debug\Astar.o">
 <dep name=".\Generated_Source\PSoC5\CONTROL_DISABLE_1.h" />
 <dep name=".\Generated_Source\PSoC5\CONTROL_DISABLE_2.h" />
@@ -1690,7 +1694,7 @@
 <file name=".\CortexM3\ARM_GCC_541\Debug\Additional_HD.hex">
 <dep name=".\CortexM3\ARM_GCC_541\Debug\main.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\functions.o" />
-<dep name=".\CortexM3\ARM_GCC_541\Debug\movements.o" />
+<dep name=".\CortexM3\ARM_GCC_541\Debug\comments.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\cymetadata.o" />
 <dep name=".\CortexM3\ARM_GCC_541\Debug\cy_em_eeprom.o" />
@@ -1888,6 +1892,8 @@
 <name_val_pair name="C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\303\COMPSYS303\301backup\Dulanya\301_15_path_following\Additional_HD.cydsn\CortexM3\ARM_GCC_541\Debug\Additional_HD.hex" v="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects" />
 <name_val_pair name="movements.c" v="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
 <name_val_pair name="functions.c" v="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="comments.c" v="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
+<name_val_pair name="C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\301\COMPSYS301\Dulanya\301_15_path_following\Additional_HD.cydsn\CortexM3\ARM_GCC_541\Debug\Additional_HD.hex" v="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects" />
 </name>
 </genericCmdLineData>
 <codeGenCmdLineTag v="-.appdatapath &quot;C:\Users\dulan\AppData\Local\Cypress Semiconductor\PSoC Creator\4.4&quot; -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\303\COMPSYS303\301backup\Dulanya\301_15_path_following\Additional_HD.cydsn\Additional_HD.cyprj -d CY8C5888LTI-LP097 -s C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\303\COMPSYS303\301backup\Dulanya\301_15_path_following\Additional_HD.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE" />
@@ -2459,7 +2465,7 @@
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
 </warp_dep>
-<deps_time v="133415769233412893" />
+<deps_time v="133420689347288300" />
 <top_block v="TopDesign" />
 <last_generation v="6" />
 <pdl_path v="" />
@@ -2469,7 +2475,7 @@
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM3" v="133416407265812207" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM3" v="133420814532500827" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>

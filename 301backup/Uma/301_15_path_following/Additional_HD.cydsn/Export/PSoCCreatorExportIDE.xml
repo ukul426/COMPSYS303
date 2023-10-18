@@ -38,7 +38,7 @@
         <Files Root="C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\303\COMPSYS303\301backup\Dulanya\301_15_path_following\Additional_HD.cydsn">
           <File BuildType="BUILD" Toolchain="">main.c</File>
           <File BuildType="BUILD" Toolchain="">functions.c</File>
-          <File BuildType="BUILD" Toolchain="">movements.c</File>
+          <File BuildType="BUILD" Toolchain="">comments.c</File>
           <File BuildType="BUILD" Toolchain="">..\map.h</File>
           <File BuildType="BUILD" Toolchain="">program.h</File>
           <File BuildType="BUILD" Toolchain="">map2.h</File>
