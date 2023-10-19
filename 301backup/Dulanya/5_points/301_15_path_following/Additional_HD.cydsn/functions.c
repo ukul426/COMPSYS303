@@ -160,7 +160,7 @@ int getDistance_V(int stepCount){
     }else if(stepCount>4){
         return stepCount*6.7;
     }else if(stepCount>2){
-        return stepCount*5.3;
+        return stepCount*5.2;
     }else{
         return stepCount*5;
     }

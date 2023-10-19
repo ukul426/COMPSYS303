@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
   28:functions.c   **** typedef struct {
   29:functions.c   ****     int x, y;
   30:functions.c   **** } Node;
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 2
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 2
 
 
   31:functions.c   **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
   62 0004 0029     		cmp	r1, #0
   63 0006 05DB     		blt	.L7
   64              		.loc 1 50 0 discriminator 3
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 3
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 3
 
 
   65 0008 1229     		cmp	r1, #18
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  115              		.cfi_def_cfa_offset 5796
  116 0008 81B0     		sub	sp, sp, #4
  117              		.cfi_def_cfa_offset 5800
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 4
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 4
 
 
  118 000a 8146     		mov	r9, r0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  160 0042 0135     		adds	r5, r5, #1
  161              	.LVL14:
  162              	.L10:
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 5
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 5
 
 
   59:functions.c   ****         for (int j = 0; j < COLS; j++) {
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  198 0088 07EB4702 		add	r2, r7, r7, lsl #1
  199 008c E423     		movs	r3, #228
  200 008e 03FB08F3 		mul	r3, r3, r8
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 6
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 6
 
 
  201 0092 03EB8203 		add	r3, r3, r2, lsl #2
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  246              		.loc 1 90 0
  247 00ea 06EB4601 		add	r1, r6, r6, lsl #1
  248 00ee 03FB04F3 		mul	r3, r3, r4
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 7
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 7
 
 
  249 00f2 03EB8103 		add	r3, r3, r1, lsl #2
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  289 0130 02FB00F2 		mul	r2, r2, r0
  290 0134 02EB8303 		add	r3, r2, r3, lsl #2
  291 0138 0DF62412 		addw	r2, sp, #2340
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 8
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 8
 
 
  292 013c D358     		ldr	r3, [r2, r3]
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
   77:functions.c   ****         // Mark the current cell as visited
  337              		.loc 1 77 0 is_stmt 0 discriminator 1
  338 016a DDF82039 		ldr	r3, [sp, #2336]
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 9
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 9
 
 
  339 016e 019A     		ldr	r2, [sp, #4]
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  378              		.loc 1 117 0
  379 01c8 039B     		ldr	r3, [sp, #12]
  380 01ca 9945     		cmp	r9, r3
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 10
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 10
 
 
  381 01cc E1D1     		bne	.L23
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  419              		.cfi_def_cfa_offset 36
  420              		@ sp needed
  421 0204 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 11
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 11
 
 
  422              	.LVL39:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  138:functions.c   ****         return stepCount*10.6;
  471              		.loc 1 138 0
  472 001e FFF7FEFF 		bl	__aeabi_i2d
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 12
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 12
 
 
  473              	.LVL45:
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  521 006c FFF7FEFF 		bl	__aeabi_dmul
  522              	.LVL58:
  523 0070 FFF7FEFF 		bl	__aeabi_d2iz
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 13
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 13
 
 
  524              	.LVL59:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  567 0006 FFF7FEFF 		bl	__aeabi_i2d
  568              	.LVL63:
  569 000a 1DA3     		adr	r3, .L49
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 14
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 14
 
 
  570 000c D3E90023 		ldrd	r2, [r3]
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  618 005c FFF7FEFF 		bl	__aeabi_d2iz
  619              	.LVL77:
  620 0060 08BD     		pop	{r3, pc}
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 15
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 15
 
 
  621              	.LVL78:
@@ -847,7 +847,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  623              		.loc 1 162 0
  624 0062 0228     		cmp	r0, #2
  625 0064 09DD     		ble	.L47
- 163:functions.c   ****         return stepCount*5.3;
+ 163:functions.c   ****         return stepCount*5.2;
  626              		.loc 1 163 0
  627 0066 FFF7FEFF 		bl	__aeabi_i2d
  628              	.LVL79:
@@ -892,13 +892,13 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  651 0094 CCCC1C40 		.word	1075629260
  652 0098 CDCCCCCC 		.word	-858993459
  653 009c CCCC1A40 		.word	1075498188
- 654 00a0 33333333 		.word	858993459
- 655 00a4 33331540 		.word	1075131187
+ 654 00a0 CDCCCCCC 		.word	-858993459
+ 655 00a4 CCCC1440 		.word	1075104972
  656              		.cfi_endproc
  657              	.LFE68:
  658              		.size	getDistance_V, .-getDistance_V
  659              		.section	.text.getMovementArray,"ax",%progbits
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 16
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 16
 
 
  660              		.align	2
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  699              	.L72:
  700              	.LBB14:
  193:functions.c   ****         int next_row = path[i].x;
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 17
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 17
 
 
  701              		.loc 1 193 0
@@ -980,9 +980,9 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  712              		.loc 1 198 0 is_stmt 0 discriminator 1
  713 0028 4945     		cmp	r1, r9
  714 002a 1FD1     		bne	.L53
- 199:functions.c   ****                     stepCount++ ;
+ 199:functions.c   ****                     stepCount+=2 ;
  715              		.loc 1 199 0 is_stmt 1
- 716 002c 541C     		adds	r4, r2, #1
+ 716 002c 941C     		adds	r4, r2, #2
  717              	.LVL90:
  200:functions.c   ****                     position++;
  718              		.loc 1 200 0
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  744 0050 2044     		add	r0, r0, r4
  745 0052 734B     		ldr	r3, .L74+4
  746 0054 43F83800 		str	r0, [r3, r8, lsl #3]
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 18
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 18
 
 
  747              	.L56:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  785              		.loc 1 219 0
  786 0088 C0E0     		b	.L58
  787              	.LVL100:
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 19
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 19
 
 
  788              	.L64:
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  232:functions.c   ****                     stepCount+=2;
  233:functions.c   ****                     position++;
  829              		.loc 1 233 0 is_stmt 1
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 20
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 20
 
 
  830 00c0 08F10108 		add	r8, r8, #1
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  866              		.loc 1 248 0
  867 00ee 2846     		mov	r0, r5
  250:functions.c   ****                     continue; // Skip the rest of this iteration and go to the next
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 21
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 21
 
 
  868              		.loc 1 250 0
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  910 0122 73D1     		bne	.L58
  911              	.LVL121:
  262:functions.c   ****                     // Turn left
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 22
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 22
 
 
  263:functions.c   ****                     stepCount+=2;
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  948 0150 5146     		mov	r1, r10
  278:functions.c   ****                     current_row = next_row; // Update coordinates
  949              		.loc 1 278 0
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 23
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 23
 
 
  950 0152 2846     		mov	r0, r5
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  991              		.loc 1 291 0 is_stmt 0 discriminator 1
  992 0184 5145     		cmp	r1, r10
  993 0186 41DA     		bge	.L58
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 24
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 24
 
 
  994              	.LVL135:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  309:functions.c   ****                     current_row = next_row; // Update coordinates
  310:functions.c   ****                     current_column = next_column;
  1030              		.loc 1 310 0
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 25
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 25
 
 
  1031 01b4 5146     		mov	r1, r10
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1071              		.loc 1 322 0
  1072 01e4 A842     		cmp	r0, r5
  1073 01e6 11DA     		bge	.L58
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 26
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 26
 
 
  1074              		.loc 1 322 0 is_stmt 0 discriminator 1
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1116              		.align	2
  1117              	.L74:
  1118 021c 00000000 		.word	path
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 27
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 27
 
 
  1119 0220 00000000 		.word	movementArray
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1173 005c 00000000 		.word	0
  1174 0060 00000000 		.word	0
  1175 0064 00000000 		.word	0
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 28
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 28
 
 
  1176 0068 00000000 		.word	0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1230 0140 01000000 		.word	1
  1231 0144 00000000 		.word	0
  1232 0148 01000000 		.word	1
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 29
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 29
 
 
  1233 014c 00000000 		.word	0
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1287 0224 01000000 		.word	1
  1288 0228 00000000 		.word	0
  1289 022c 00000000 		.word	0
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 30
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 30
 
 
  1290 0230 00000000 		.word	0
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1344 0308 01000000 		.word	1
  1345 030c 00000000 		.word	0
  1346 0310 01000000 		.word	1
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 31
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 31
 
 
  1347 0314 01000000 		.word	1
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1401 03ec 00000000 		.word	0
  1402 03f0 00000000 		.word	0
  1403 03f4 00000000 		.word	0
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 32
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 32
 
 
  1404 03f8 00000000 		.word	0
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1458 0015 02020000 		.4byte	.LASF64
  1459 0019 48000000 		.4byte	.Ldebug_ranges0+0x48
  1460 001d 00000000 		.4byte	0
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 33
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 33
 
 
  1461 0021 00000000 		.4byte	.Ldebug_line0
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1515 0084 02       		.uleb128 0x2
  1516 0085 01       		.byte	0x1
  1517 0086 08       		.byte	0x8
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 34
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 34
 
 
  1518 0087 90010000 		.4byte	.LASF11
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1572 00f3 C5010000 		.4byte	.LASF22
  1573 00f7 03       		.byte	0x3
  1574 00f8 00       		.byte	0
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 35
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 35
 
 
  1575 00f9 03       		.uleb128 0x3
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1629 015e 2C       		.byte	0x2c
  1630 015f F9000000 		.4byte	0xf9
  1631 0163 00000000 		.4byte	.LFB64
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 36
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 36
 
 
  1632 0167 0C000000 		.4byte	.LFE64-.LFB64
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1686 01de 01       		.byte	0x1
  1687 01df 36       		.byte	0x36
  1688 01e0 68000000 		.4byte	0x68
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 37
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 37
 
 
  1689 01e4 C4000000 		.4byte	.LLST3
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1743 024d E452     		.sleb128 -5788
  1744 024f 13       		.uleb128 0x13
  1745 0250 12000000 		.4byte	.LBB2
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 38
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 38
 
 
  1746 0254 36000000 		.4byte	.LBE2-.LBB2
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1800 02d7 71010000 		.4byte	.LASF38
  1801 02db 01       		.byte	0x1
  1802 02dc 55       		.byte	0x55
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 39
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 39
 
 
  1803 02dd 68000000 		.4byte	0x68
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1857 0351 00       		.byte	0
  1858 0352 00       		.byte	0
  1859 0353 00       		.byte	0
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 40
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 40
 
 
  1860 0354 17       		.uleb128 0x17
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1914 03cc 01       		.byte	0x1
  1915 03cd 86       		.byte	0x86
  1916 03ce 68000000 		.4byte	0x68
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 41
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 41
 
 
  1917 03d2 6B020000 		.4byte	.LLST17
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  1971 0456 01       		.byte	0x1
  1972 0457 B7       		.byte	0xb7
  1973 0458 F9000000 		.4byte	0xf9
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 42
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 42
 
 
  1974 045c 41040000 		.4byte	.LLST23
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2028 04e4 50       		.byte	0x50
  2029 04e5 02       		.uleb128 0x2
  2030 04e6 74       		.byte	0x74
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 43
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 43
 
 
  2031 04e7 00       		.sleb128 0
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2085 0569 22       		.uleb128 0x22
  2086 056a A0000000 		.4byte	.LASF58
  2087 056e 01       		.byte	0x1
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 44
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 44
 
 
  2088 056f 04       		.byte	0x4
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2142 0004 0E       		.uleb128 0xe
  2143 0005 13       		.uleb128 0x13
  2144 0006 0B       		.uleb128 0xb
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 45
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 45
 
 
  2145 0007 03       		.uleb128 0x3
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2199 003d 3A       		.uleb128 0x3a
  2200 003e 0B       		.uleb128 0xb
  2201 003f 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 46
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 46
 
 
  2202 0040 0B       		.uleb128 0xb
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2256 0076 13       		.uleb128 0x13
  2257 0077 00       		.byte	0
  2258 0078 00       		.byte	0
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 47
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 47
 
 
  2259 0079 0A       		.uleb128 0xa
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2313 00b0 01       		.uleb128 0x1
  2314 00b1 12       		.uleb128 0x12
  2315 00b2 06       		.uleb128 0x6
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 48
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 48
 
 
  2316 00b3 40       		.uleb128 0x40
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2370 00ea 06       		.uleb128 0x6
  2371 00eb 40       		.uleb128 0x40
  2372 00ec 18       		.uleb128 0x18
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 49
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 49
 
 
  2373 00ed 9742     		.uleb128 0x2117
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2427 0124 11       		.uleb128 0x11
  2428 0125 01       		.uleb128 0x1
  2429 0126 12       		.uleb128 0x12
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 50
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 50
 
 
  2430 0127 06       		.uleb128 0x6
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2484 015f 11       		.uleb128 0x11
  2485 0160 01       		.uleb128 0x1
  2486 0161 31       		.uleb128 0x31
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 51
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 51
 
 
  2487 0162 13       		.uleb128 0x13
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2541 019b 11       		.uleb128 0x11
  2542 019c 01       		.uleb128 0x1
  2543 019d 12       		.uleb128 0x12
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 52
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 52
 
 
  2544 019e 06       		.uleb128 0x6
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2598 01d9 34       		.uleb128 0x34
  2599 01da 00       		.byte	0
  2600 01db 03       		.uleb128 0x3
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 53
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 53
 
 
  2601 01dc 0E       		.uleb128 0xe
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2655 0030 50       		.byte	0x50
  2656 0031 9F       		.byte	0x9f
  2657 0032 14000000 		.4byte	.LVL4
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 54
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 54
 
 
  2658 0036 16000000 		.4byte	.LVL5
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2712 00b9 01       		.uleb128 0x1
  2713 00ba 51       		.byte	0x51
  2714 00bb 9F       		.byte	0x9f
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 55
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 55
 
 
  2715 00bc 00000000 		.4byte	0
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2769 0147 3E000000 		.4byte	.LVL13
  2770 014b 44000000 		.4byte	.LVL14
  2771 014f 0100     		.2byte	0x1
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 56
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 56
 
 
  2772 0151 52       		.byte	0x52
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2826 01df 32       		.byte	0x32
  2827 01e0 24       		.byte	0x24
  2828 01e1 91       		.byte	0x91
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 57
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 57
 
 
  2829 01e2 00       		.sleb128 0
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2883 0263 00000000 		.4byte	0
  2884 0267 00000000 		.4byte	0
  2885              	.LLST17:
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 58
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 58
 
 
  2886 026b 00000000 		.4byte	.LVL40
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2940 02e7 9F       		.byte	0x9f
  2941 02e8 76000000 		.4byte	.LVL60
  2942 02ec 7A000000 		.4byte	.LVL61
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 59
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 59
 
 
  2943 02f0 0100     		.2byte	0x1
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  2997 036b 50       		.byte	0x50
  2998 036c 9F       		.byte	0x9f
  2999 036d 62000000 		.4byte	.LVL78
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 60
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 60
 
 
  3000 0371 69000000 		.4byte	.LVL79-1
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3054 03f1 0100     		.2byte	0x1
  3055 03f3 52       		.byte	0x52
  3056 03f4 14000000 		.4byte	.LVL86
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 61
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 61
 
 
  3057 03f8 1C020000 		.4byte	.LVL156
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3111 047b E2000000 		.4byte	.LVL112
  3112 047f 12010000 		.4byte	.LVL119
  3113 0483 0100     		.2byte	0x1
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 62
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 62
 
 
  3114 0485 56       		.byte	0x56
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3168 050f 56       		.byte	0x56
  3169 0510 00000000 		.4byte	0
  3170 0514 00000000 		.4byte	0
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 63
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 63
 
 
  3171              	.LLST24:
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3225 059d FA000000 		.4byte	.LVL115
  3226 05a1 0100     		.2byte	0x1
  3227 05a3 52       		.byte	0x52
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 64
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 64
 
 
  3228 05a4 FA000000 		.4byte	.LVL115
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3282 062a 88010000 		.4byte	.LVL135
  3283 062e 0100     		.2byte	0x1
  3284 0630 52       		.byte	0x52
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 65
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 65
 
 
  3285 0631 88010000 		.4byte	.LVL135
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3339 06b7 2C020000 		.4byte	.LFE69
  3340 06bb 0100     		.2byte	0x1
  3341 06bd 52       		.byte	0x52
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 66
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 66
 
 
  3342 06be 00000000 		.4byte	0
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3396 0751 0100     		.2byte	0x1
  3397 0753 50       		.byte	0x50
  3398 0754 EC000000 		.4byte	.LVL113
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 67
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 67
 
 
  3399 0758 F2000000 		.4byte	.LVL114
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3453 07ed 50       		.byte	0x50
  3454 07ee DA010000 		.4byte	.LVL147
  3455 07f2 E4010000 		.4byte	.LVL148
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 68
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 68
 
 
  3456 07f6 0100     		.2byte	0x1
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3510 0889 F2000000 		.4byte	.LVL114
  3511 088d 0100     		.2byte	0x1
  3512 088f 5A       		.byte	0x5a
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 69
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 69
 
 
  3513 0890 F2000000 		.4byte	.LVL114
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3567 0927 0100     		.2byte	0x1
  3568 0929 5A       		.byte	0x5a
  3569 092a E4010000 		.4byte	.LVL148
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 70
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 70
 
 
  3570 092e F5010000 		.4byte	.LVL152-1
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3624 001c 1C000000 		.4byte	.LFE65-.LFB65
  3625 0020 00000000 		.4byte	.LFB66
  3626 0024 18020000 		.4byte	.LFE66-.LFB66
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 71
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 71
 
 
  3627 0028 00000000 		.4byte	.LFB67
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3674              	.LASF31:
  3675 000e 74617267 		.ascii	"targetX\000"
  3675      65745800 
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 72
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 72
 
 
  3676              	.LASF32:
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3701      7900
  3702              	.LASF26:
  3703 00ae 70617265 		.ascii	"parent\000"
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 73
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 73
 
 
  3703      6E7400
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3731      756D6E00 
  3732              	.LASF34:
  3733 0142 63757272 		.ascii	"currentNode\000"
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 74
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 74
 
 
  3733      656E744E 
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3763 01c5 57455354 		.ascii	"WEST\000"
  3763      00
  3764              	.LASF50:
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 75
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 75
 
 
  3765 01ca 74617267 		.ascii	"target_column\000"
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 1
  3787 02b0 70617468 		.ascii	"pathLength\000"
  3787      4C656E67 
  3787      746800
-ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccTECqga.s 			page 76
+ARM GAS  C:\Users\dulan\AppData\Local\Temp\ccFlylwi.s 			page 76
 
 
  3788              	.LASF10:

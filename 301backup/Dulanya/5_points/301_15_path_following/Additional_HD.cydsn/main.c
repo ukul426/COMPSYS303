@@ -44,22 +44,23 @@ uint8 comp2_sum;
 uint8 comp3_sum;
 
 
+
 int food_list[6][2]= {
-{9,7},
-{3,5},
-{3,1},
-{7,11},
-{1,17},
-{13,15}
+{7,15},
+{3,14},
+{1,6},
+{4,17},
+{6,11},
+{8,1}
 };
 
 //////need to change for different points
 RobotDirection startDirectionArray[5]={
     EAST,
-    SOUTH,
+    WEST,
     EAST,
     NORTH,
-    SOUTH
+    NORTH
     
 };
 
@@ -156,7 +157,7 @@ void turn_180(){
     PWM_2_WriteCompare(50);
     QuadDec_M2_SetCounter(0);
     reverse();
-    while(abs(QuadDec_M2_GetCounter())<90){
+    while(abs(QuadDec_M2_GetCounter())<65){
         ;;
     }
     stop();

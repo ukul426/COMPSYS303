@@ -306,6 +306,7 @@
 <Unloaded />
 <OpenDocs>
 <name v=".\Additional_HD.cydsn\main.c" />
+<name v=".\Additional_HD.cydsn\functions.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -313,7 +314,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1213, 485" SelectedTabbedMdiWindow="4dfaaffa-36f3-488d-ab9c-69629f207f31"><DocumentWindow Key="C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\303\COMPSYS303\301backup\Dulanya\301_15_path_following\Additional_HD.cydsn\main.c" Guid="4dfaaffa-36f3-488d-ab9c-69629f207f31" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="041c6fd3-e180-45cc-92a9-b934e1531784" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1213, 485" SelectedTabbedMdiWindow="1c3640a8-5bcc-431a-945b-0cadc26d12d8"><DocumentWindow Key="C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\303\COMPSYS303\301backup\Dulanya\5_points\301_15_path_following\Additional_HD.cydsn\main.c" Guid="9c00a295-1f7a-4e24-b5c5-1bc122dce463" /><DocumentWindow Key="C:\Users\dulan\OneDrive\Desktop\ENGGEN\2023_sem2\303\COMPSYS303\301backup\Dulanya\5_points\301_15_path_following\Additional_HD.cydsn\functions.c" Guid="1c3640a8-5bcc-431a-945b-0cadc26d12d8" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
