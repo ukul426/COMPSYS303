@@ -1,0 +1,6 @@
+H:\Documents\303 - 301\COMPSYS303\301backup\Uma\5_points\301_15_path_following\Additional_HD.cydsn\Additional_HD.cyprj|e2a66b2a-e2ad-48f2-b339-4293e52165a7
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|e6448a05-e20c-40ab-b4f5-0509a49e3354
+C:\Users\ukul426\OneDrive - The University of Auckland\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|28a20ca5-d8d3-426b-bbe2-c6bc62678539
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|807f13fd-93de-4d44-82f0-8b28dc08a54b
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|74b42af4-0971-4046-9e8b-1c8915244380
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|29d46dd8-380b-42ee-9f0d-3a1666b6ded7
