@@ -45,21 +45,21 @@ uint8 comp3_sum;
 
 
 int food_list[6][2]= {
-{6,5},
-{3,15},
-{9,17},
-{1,3},
-{7,15},
-{13,9}
+{9,7},
+{3,5},
+{3,1},
+{7,11},
+{1,17},
+{13,15}
 };
 
 //////need to change for different points
 RobotDirection startDirectionArray[5]={
-    SOUTH,
-    WEST,
-    WEST,
     EAST,
-    EAST
+    SOUTH,
+    EAST,
+    NORTH,
+    SOUTH
     
 };
 
@@ -97,7 +97,7 @@ void stop(){
 void turnLeft(){
     QuadDec_M2_SetCounter(0);
     PWM_1_WriteCompare(70);
-    PWM_2_WriteCompare(31);
+    PWM_2_WriteCompare(29);
      while(abs(QuadDec_M2_GetCounter())<50){
         ;;
     }
@@ -122,7 +122,7 @@ void turnRight(){
     QuadDec_M1_SetCounter(0);
     PWM_1_WriteCompare(30);
     PWM_2_WriteCompare(69);
-     while(abs(QuadDec_M1_GetCounter())<55){
+     while(abs(QuadDec_M1_GetCounter())<40){
         ;;
     }
     PWM_1_WriteCompare(50);
@@ -348,29 +348,29 @@ int main(void)
         
         //this loops through all the movement required in the path
         //movement contains distance for going straight and a turn
-        for(int i=0; i<25;i++){//length should be how many movements there should be
+        for(int j=0; j<25;j++){//length should be how many movements there should be
            // if(i!=0){
-                goStraight_cm(movementArray[i].distance-6);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
+                goStraight_cm(movementArray[j].distance-5);//if not the first movement remove 5 cm as turn moves cart roughly 5 cm forward
            // }else{
            //     goStraight_cm(movementArray[i].distance);
            // }
             
-            if(movementArray[i].turnDirection=='R'){
+            if(movementArray[j].turnDirection=='R'){
                while(Sout_R_Read()!=0){
                  goStraight();
                }
                if(Sout_R_Read()==0){
                   turnRight();
                }
-            }else if(movementArray[i].turnDirection=='L'){
+            }else if(movementArray[j].turnDirection=='L'){
                while(Sout_L_Read()!=0){
                  goStraight();
                }
                if(Sout_L_Read()==0){
                   turnLeft();
                }
-            }else if(movementArray[i].turnDirection=='E'){
-                //goStraight_cm(3);
+            }else if(movementArray[j].turnDirection=='E'){
+                goStraight_cm(4);
                 stop();
                 break;
             }

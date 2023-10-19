@@ -73,12 +73,7 @@ alt_u32 URI_timer_isr(void* context) {
 int main() {
     alt_alarm AVI_timer, AEI_timer, PVARP_timer, VRP_timer, LRI_timer, URI_timer;
 
-    // Initialize your timers
 
-
-    alt_alarm_start(&VRP_timer, VRP_VALUE, VRP_timer_isr, NULL);
-    alt_alarm_start(&LRI_timer, LRI_VALUE, LRI_timer_isr, NULL);
-    alt_alarm_start(&URI_timer, URI_VALUE, URI_timer_isr, NULL);
 
     // Other variables for tracking events and timers
     bool A_event = false;
