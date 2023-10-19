@@ -257,14 +257,13 @@ void pacemaker_C_logic(){
            case VRP_IDLE:
                if (VS || VP ) {
                    V_event = 1;
-                   vrp_timer_flag=0;
                    alt_alarm_start(&vrp_timer, VRP_VALUE, vrp_timer_isr, NULL);
                    vrp_current_state = VRP_BLOCK;
                }
               break;
 
            case VRP_BLOCK:
-               if (VS||VP) {
+               if (VS) {
                    VR = 1;
                    vrp_current_state = VRP_BLOCK;
                }else if(vrp_timer_flag) {

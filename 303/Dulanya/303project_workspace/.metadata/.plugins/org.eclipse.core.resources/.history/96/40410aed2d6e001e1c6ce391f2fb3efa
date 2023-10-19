@@ -257,14 +257,13 @@ void pacemaker_C_logic(){
            case VRP_IDLE:
                if (VS || VP ) {
                    V_event = 1;
-                   vrp_timer_flag=0;
                    alt_alarm_start(&vrp_timer, VRP_VALUE, vrp_timer_isr, NULL);
                    vrp_current_state = VRP_BLOCK;
                }
               break;
 
            case VRP_BLOCK:
-               if (VS||VP) {
+               if (VS) {
                    VR = 1;
                    vrp_current_state = VRP_BLOCK;
                }else if(vrp_timer_flag) {
@@ -289,45 +288,6 @@ int main(){
 
 
 while (1) {
-
-	//implement do tick function here
-
-	   AS=0;
-	   VS=0;
-
-       //C implementation
-       AS = (((~IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE)) & 0x2) >> 1);
-       VS = ((~IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE)) & 0x1);
-
-       if(AS) {
-            printf("AS\n");
-       }
-       if(VS & 0x01) {
-            printf("VS\n");
-       }
-
-       pacemaker_C_logic();
-
-
-
-
-       if(AP) {
-            printf("AP\n");
-            IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b10);
-       }else if(VP) {
-            printf("VP\n");
-            IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b01);
-       }else {
-            IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b00);
-       }
-
-
-
-
-    }
-
-    return 0;
-}
 // //SCchart implementation
 // if(doTick) {
 // doTick = 0;
@@ -359,3 +319,38 @@ while (1) {
 // }
 // }
 //
+
+
+//C implementation
+AS = (((~IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE)) & 0x2) >> 1);
+VS = ((~IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE)) & 0x1);
+
+if(AS) {
+printf("AS\n");
+}
+if(VS & 0x01) {
+printf("VS\n");
+}
+
+pacemaker_C_logic();
+
+
+
+
+if(AP) {
+printf("APPPPPPPPPPPPPP\n");
+IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b10);
+}else if(VP) {
+printf("VPPPPPPPPPPPPPPPPP\n");
+IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b01);
+}else {
+IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b00);
+}
+
+
+
+
+}
+
+return 0;
+}

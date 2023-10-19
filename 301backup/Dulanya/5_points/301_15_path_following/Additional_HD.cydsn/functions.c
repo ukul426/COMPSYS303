@@ -133,15 +133,15 @@ void dijkstra(int startX, int startY, int targetX, int targetY) {
 
 int getDistance_H(int stepCount){
     if(stepCount>10){
-        return stepCount*11.5;
-    }else if(stepCount>8){
         return stepCount*11.2;
+    }else if(stepCount>8){
+        return stepCount*10.6;
     }else if(stepCount>6){
-        return stepCount*10.7;
+        return stepCount*10.5;
     }else if(stepCount>4){
-        return stepCount*10;
+        return stepCount*9.7;
     }else if(stepCount>2){
-        return stepCount*7.9;
+        return stepCount*7.5;
     }else{
         return stepCount*7;
     }
@@ -152,15 +152,15 @@ int getDistance_H(int stepCount){
 
 int getDistance_V(int stepCount){
      if(stepCount>10){
-        return stepCount*8.5;
-    }else if(stepCount>8){
         return stepCount*7.9;
+    }else if(stepCount>8){
+        return stepCount*7.7;
     }else if(stepCount>6){
-        return stepCount*7.3;
+        return stepCount*7.2;
     }else if(stepCount>4){
-        return stepCount*6.8;
+        return stepCount*6.7;
     }else if(stepCount>2){
-        return stepCount*5.4;
+        return stepCount*5.3;
     }else{
         return stepCount*5;
     }
@@ -196,12 +196,12 @@ void getMovementArray(int start_row,int start_column,int target_row,int target_c
 
 
         if(current_row == target_row && current_column == target_column ){
-                    stepCount+=2;
+                    stepCount+=2 ;
                     position++;
                     if(current_direction==EAST ||current_direction==WEST){
-                        movementArray[position].distance = getDistance_H(stepCount);
+                        movementArray[position].distance = getDistance_H(stepCount)+stepCount;
                     }else{
-                        movementArray[position].distance = getDistance_V(stepCount);
+                        movementArray[position].distance = getDistance_V(stepCount)+stepCount;
                     }
                     movementArray[position].turnDirection = 'E';
                     robot_direction=current_direction;
