@@ -1,0 +1,355 @@
+/*
+ * "Hello World" example.
+ *
+ * This example prints 'Hello from Nios II' to the STDOUT stream. It runs on
+ * the Nios II 'standard', 'full_featured', 'fast', and 'low_cost' example
+ * designs. It runs with or without the MicroC/OS-II RTOS and requires a STDOUT
+ * device in your system's hardware.
+ * The memory footprint of this hosted application is ~69 kbytes by default
+ * using the standard reference design.
+ *
+ * For a reduced footprint version of this template, and an explanation of how
+ * to reduce the memory footprint for a given application, see the
+ * "small_hello_world" template.
+ *
+ */
+
+#include <unistd.h>
+#include "stdio.h"
+#include "system.h"
+#include "sys/alt_alarm.h"
+#include <altera_avalon_pio_regs.h>
+#include <system.h> // to use the symbolic names
+#include <altera_avalon_pio_regs.h> // to use PIO functions
+#include <alt_types.h> // alt_u32 is a kind of alt_types
+#include <sys/alt_irq.h>
+#include <stdbool.h>
+#include "pacemaker.h"
+
+#define AVI_VALUE 300
+#define AEI_VALUE 800
+#define PVARP_VALUE 50
+#define VRP_VALUE 150
+#define LRI_VALUE 950
+#define URI_VALUE 900
+
+typedef enum{
+	AVI_IDLE,
+	AVI_WAIT
+}avi_state;
+
+typedef enum{
+	AEI_IDLE,
+	AEI_WAIT
+}aei_state;
+
+typedef enum{
+	LRI_IDLE,
+	LRI_WAIT
+}lri_state;
+
+typedef enum{
+	URI_IDLE,
+	URI_WAIT
+}uri_state;
+
+typedef enum{
+	PVARP_IDLE,
+	PVARP_BLOCK
+}pvarp_state;
+
+typedef enum{
+	VRP_IDLE,
+	VRP_BLOCK
+}vrp_state;
+
+
+alt_alarm avi_timer, aei_timer, pvarp_timer, vrp_timer, lri_timer, uri_timer;
+int timeCountMain = 0;
+
+
+
+int AS = 0, VS = 0, AP = 0, VP = 0 ,V_event = 0, VR = 0, A_event = 0, AR = 0;
+int avi_timer_flag = 0, aei_timer_flag = 0, pvarp_timer_flag = 0, vrp_timer_flag = 0,  lri_timer_flag = 0, uri_timer_flag = 0;
+bool  inside_URI = false;
+
+
+int prev_VP;
+int prev_AP;
+
+avi_state avi_current_state =  AVI_IDLE;
+aei_state aei_current_state = AEI_IDLE;
+lri_state lri_current_state = LRI_IDLE;
+uri_state uri_current_state = URI_IDLE;
+pvarp_state pvarp_current_state = PVARP_IDLE;
+vrp_state vrp_current_state = VRP_IDLE;
+
+
+
+//SCchart implementation
+int doTick = 0;
+// Timer ISR
+alt_u32 timer_isr_function(void* context) {
+	doTick = 1;
+	return 1; // Set the timer to trigger every 10ms
+}
+
+
+
+alt_u32 avi_timer_isr(void* context) {
+    avi_timer_flag = 1;
+    printf("AVI timer");
+    return 0;
+}
+
+alt_u32 aei_timer_isr(void* context) {
+    aei_timer_flag = 1;
+    return 0;
+}
+
+
+alt_u32 pvarp_timer_isr(void* context) {
+	pvarp_timer_flag = 1;
+	return 0;
+}
+
+alt_u32 vrp_timer_isr(void* context) {
+	vrp_timer_flag = 1;
+	return 0;
+}
+
+alt_u32 lri_timer_isr(void* context) {
+    lri_timer_flag = 1;
+    return 0;
+}
+
+alt_u32 uri_timer_isr(void* context) {
+    uri_timer_flag = 1;
+    return 0;
+}
+
+void pacemaker_C_logic(){
+	// Implement state transitions and actions based on current_state
+			        //AVI
+			        switch (avi_current_state) {
+			            case AVI_IDLE:
+			                if (A_event) {
+			                    alt_alarm_start(&avi_timer, AVI_VALUE, avi_timer_isr, NULL);
+//			                    A_event =0;
+			                    avi_current_state = AVI_WAIT;
+			                }
+			                break;
+
+			            case AVI_WAIT:
+			            	if (V_event){
+//			                    V_event =0;
+			                	avi_current_state = AVI_IDLE;
+			                }else if((avi_timer_flag) && (!inside_URI)) {
+
+			                    VP = 1;
+			                    avi_timer_flag = 0;
+			                    avi_current_state = AVI_IDLE;
+			                }
+			                break;
+			        }
+
+			        //AEI
+			         switch (aei_current_state) {
+			            case AEI_IDLE:
+			                if (V_event) {
+			                    alt_alarm_start(&aei_timer, AEI_VALUE, aei_timer_isr, NULL);
+			                    V_event =0;
+			                    aei_current_state = AEI_WAIT;
+			                }
+			               break;
+
+			            case AEI_WAIT:
+			            	if(A_event){
+			                	A_event =0;
+			                	aei_current_state = AEI_IDLE;
+			                }else if(aei_timer_flag) {
+			                    AP = 1;
+			                    aei_timer_flag = 0;
+			                    aei_current_state = AEI_IDLE;
+			                }
+			                break;
+			        }
+
+			        //LRI
+			        switch (lri_current_state) {
+			            case LRI_IDLE:
+			                if (V_event) {
+			                    alt_alarm_start(&lri_timer, LRI_VALUE, lri_timer_isr, NULL);
+			                    V_event =0;
+			                    lri_current_state = LRI_WAIT;
+			                }
+			               break;
+
+			            case LRI_WAIT:
+			            	if (V_event){
+			                    alt_alarm_start(&lri_timer, LRI_VALUE, lri_timer_isr, NULL);
+			                    V_event =0;
+			                    lri_current_state = LRI_WAIT;
+			                }else if(lri_timer_flag) {
+			                    VP = 1;
+			                    lri_timer_flag = 0;
+			                    lri_current_state = LRI_IDLE;
+			                }
+			                break;
+			        }
+
+
+
+			        //URI
+			        switch (uri_current_state) {
+			            case URI_IDLE:
+			                if (V_event) {
+			                    alt_alarm_start(&uri_timer, URI_VALUE, uri_timer_isr, NULL);
+			                    V_event =0;
+			                    inside_URI = true;
+			                    uri_current_state = URI_WAIT;
+			                }
+			               break;
+
+			            case URI_WAIT:
+			                if (V_event) {
+			                    alt_alarm_start(&uri_timer, URI_VALUE, uri_timer_isr, NULL);
+			                    V_event =0;
+			                    uri_current_state = URI_WAIT;
+			                }else if(uri_timer_flag) {
+			                    inside_URI = false;
+			                    uri_timer_flag = 0;
+			                }
+			                break;
+			        }
+
+
+
+			        //PVARP
+			        switch (pvarp_current_state) {
+			            case PVARP_IDLE:
+			                if (AS || prev_AP ) {
+
+			                    A_event = 1;
+			                    pvarp_current_state = PVARP_IDLE;
+			                }else if(VS  || prev_VP ){
+			                    alt_alarm_start(&pvarp_timer, PVARP_VALUE, pvarp_timer_isr, NULL);
+			                    pvarp_current_state = PVARP_BLOCK;
+			                }
+			               break;
+
+			            case PVARP_BLOCK:
+			                if (AS ) {
+			                    AR = 1;;
+			                    pvarp_current_state = PVARP_BLOCK;
+			                }else if (pvarp_timer_flag) {
+			                	pvarp_timer_flag = 0;
+			                	pvarp_current_state = PVARP_IDLE;
+			                }
+			                break;
+			        }
+
+			        //VRP
+			        switch (vrp_current_state) {
+			            case VRP_IDLE:
+			                if (VS || prev_VP ) {
+			                    V_event = 1;
+			                    alt_alarm_start(&vrp_timer, VRP_VALUE, vrp_timer_isr, NULL);
+			                    vrp_current_state = VRP_BLOCK;
+			                }
+			               break;
+
+			            case VRP_BLOCK:
+			            	if(VS){
+			                    VR = 1;
+			                    vrp_current_state = VRP_BLOCK;
+			                }else if(vrp_timer_flag) {
+			                	vrp_timer_flag = 0;
+			                	vrp_current_state = VRP_IDLE;
+			                }
+			                break;
+			        }
+			        prev_VP = VP;
+			        prev_AP = AP;
+}
+
+
+
+int main(){
+	//SCchart implementation
+	TickData model;//create the struct
+	reset(&model);//call reset function
+	alt_alarm timer;// TIMER
+	alt_alarm_start(&timer, 1, timer_isr_function, NULL);//start the timer, with timeout of 100 milli-seconds
+
+	//C implementation
+
+
+	while (1) {
+
+		int switch_state = ((~IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE)) & 0x1);
+
+		if(switch_state & 0x01){
+			//C implementation
+			if(aei_timer_flag || avi_timer_flag || lri_timer_flag || uri_timer_flag || pvarp_timer_flag || vrp_timer_flag){
+			AS = (((~IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE)) & 0x2) >> 1);
+			VS = ((~IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE)) & 0x1);
+
+			if(AS) {
+				printf("AS\n");
+			}
+			if(VS & 0x01) {
+				printf("VS\n");
+			}
+
+			pacemaker_C_logic();
+
+			if(AP) {
+				printf("APPPPPPPPPPPPPP\n");
+				IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b10);
+			}else if(VP) {
+				printf("VPPPPPPPPPPPPPPPPP\n");
+				IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b01);
+			}else {
+				IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b00);
+			}
+			}
+
+		}else{
+			if(doTick) {
+				doTick = 0;
+				// input readings
+				model.AS = (((~IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE)) & 0x2) >> 1);
+				model.VS = ((~IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE)) & 0x1);
+
+				if(model.AS) {
+					printf("AS\n");
+				}
+				if(model.VS) {
+					printf("VS\n");
+				}
+
+				model.deltaT = 1;
+
+				tick(&model);//call tick function
+
+				if(model.AP) {
+					printf("AP\n");
+					IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b10);
+				}
+				else if(model.VP) {
+					printf("VP\n");
+					IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b01);
+					}
+				else {
+					IOWR_ALTERA_AVALON_PIO_DATA(LEDS_GREEN_BASE, 0b00);
+				}
+			}
+		}
+
+
+
+	}
+
+	return 0;
+}
